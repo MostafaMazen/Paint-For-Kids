@@ -2,12 +2,18 @@
 
 CEllipse::CEllipse(Point p1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
-	firstPoint = p1;
-	secondPoint = p2;
+	firstPoint = sFP = p1;
+	secondPoint = sSP =  p2;
+
 	StartAngle = StartAng;
 	EndAngle = EndAng;
 	xLength = p2.x - p1.x;
 	yLength = p2.y - p1.y;
+
+	startxLength = xLength;
+	startyLength = yLength;
+
+	factorPosition = 2;
 }
 
 void CEllipse::DrawMe(GUI* pGUI) const
@@ -39,7 +45,21 @@ void CEllipse::setCenterPoint(int x, int y)
 
 void CEllipse::setSize(float factor)
 {
-	//length = factor * startLength;
+	xLength = factor * startxLength;
+	yLength = factor * startyLength;
+
+	if (factor < 1) {
+		firstPoint.x = sFP.x + xLength / 2;
+		firstPoint.y = sFP.y + yLength / 2;
+		secondPoint.x = sSP.x - xLength / 2;
+		secondPoint.y = sSP.y - yLength / 2;
+		return;
+	}
+
+	firstPoint.x = sFP.x - xLength / 2;
+	firstPoint.y = sFP.y - yLength / 2;
+	secondPoint.x = sSP.x + xLength / 2;
+	secondPoint.y = sSP.y + yLength / 2;
 }
 
 bool CEllipse::hasPoint(int x, int y) const

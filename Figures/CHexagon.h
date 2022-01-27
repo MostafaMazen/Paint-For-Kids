@@ -8,7 +8,7 @@ class CHexagon : public CFigure
 private:
 	int* pX;
 	int* pY;
-	int raduis;
+	int raduis, startR;
 	Point center;
 public:
 	CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo FigureGfxInfo);

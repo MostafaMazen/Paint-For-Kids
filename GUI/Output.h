@@ -7,7 +7,7 @@ class Output	//The application manager should have a pointer to this class
 private:	
 	window* pWind;	//Pointer to the Graphics Window
 public:
-	Output();		
+	Output();
 
 	window* CreateWind(int, int, int , int) const; //creates the application window
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu

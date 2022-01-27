@@ -9,7 +9,8 @@ CHexagon::CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo Figur
 	pX = _pX;
 	pY = _pY;
 	center = _center;
-	raduis = _raduis;
+	raduis = startR = _raduis;
+	factorPosition = 2;
 }
 
 
@@ -45,7 +46,14 @@ void CHexagon::setCenterPoint(int x, int y)
 
 void CHexagon::setSize(float factor)
 {
-	//length = factor * startLength;
+	// change radius acoording to size
+	raduis = factor * startR;
+
+	for (int i = 0; i < 6; i++) {
+		pX[i] = center.x + raduis * cos(2 * M_PI * i / 6);
+		pY[i] = center.y + raduis * sin(2 * M_PI * i / 6);
+		//cout << pX[i] << " , " << pY[i] << endl;
+	}
 }
 
 bool CHexagon::hasPoint(int x, int y) const

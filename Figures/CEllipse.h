@@ -8,9 +8,11 @@ class CEllipse : public CFigure
 private:
 	Point firstPoint;
 	Point secondPoint;
+	Point sFP, sSP;
 	double  StartAngle;
 	double  EndAngle;
 	int xLength, yLength;
+	int startxLength, startyLength;
 public:
 	//CEllipse(Point,Point,double,double, GfxInfo FigureGfxInfo);
 	CEllipse(Point P1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo);
