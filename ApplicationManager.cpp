@@ -3,6 +3,7 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionSelectFig.h"
 #include "Actions\ActionAddHexagon.h"
+#include "Actions\ActionToPlay.h"
 #include "Actions\Resize.h"
 #include <iostream>
 #include "MouseState\MouseStatesUtil.h"
@@ -171,6 +172,10 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			newAct = new ActionLoad(this);
 			break;
 
+		case TO_PLAY:
+			newAct = new ActionToPlay(this);
+			break;
+
 		case EXIT:
 			if (MessageBox(pGUI->pWind->getWindow(), "Are you sure?", "Close", MB_OKCANCEL) == IDOK)
 			{
@@ -275,14 +280,25 @@ void ApplicationManager::UnSelectAllFigs() const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	pGUI->CreateDrawToolBar();
-	pGUI->CreateStatusBar();
-	if (GetSelectedFigure() != -1) {
-		pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
+
+	/// <summary>
+	///		Update for game mode
+	/// </summary>
+
+	if (UI.InterfaceMode == MODE_DRAW) {
+		pGUI->CreateDrawToolBar();
+		if (GetSelectedFigure() != -1) {
+			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
+		}
+		pGUI->ClearDrawArea();
+		for (int i = 0; i < FigCount; i++)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 	}
-	pGUI->ClearDrawArea();
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	else {
+		pGUI->ClearDrawingToolBar();
+		pGUI->CreatePlayToolBar();
+	}
+	pGUI->CreateStatusBar();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

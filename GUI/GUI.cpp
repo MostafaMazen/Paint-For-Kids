@@ -104,7 +104,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_LOAD:return LOAD;
 			case ITM_SAVE:return SAVE;
 			case ITM_SWITCH2PLAY:return TO_PLAY;
-			case ITM_EXIT: return EXIT;	
+			case ITM_EXIT: return EXIT;
+			case ITM_EXIT2: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -146,6 +147,14 @@ MouseStateNotifier* GUI::getMouseState()
 	//
 	return mouseState;
 }
+//////////////////////////////////////////////////////////////////////////////////////////
+void GUI::ClearDrawingToolBar() const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateStatusBar() const
 {
@@ -191,7 +200,7 @@ void GUI::CreateDrawToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
@@ -210,11 +219,11 @@ void GUI::CreatePlayToolBar() const
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth + 10, 10, UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(MenuItemImages[i+ ITM_PICK_FIGURETYPE], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 1);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
