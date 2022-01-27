@@ -8,9 +8,6 @@
 #include"..\ApplicationManager.h"
 
 
-
-
-
 ActionLoad::ActionLoad(ApplicationManager* pApp) :Action(pApp)
 {
 	myFileName = "figsFile";
