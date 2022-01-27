@@ -2,6 +2,7 @@
 #define CHEXAGON_H
 
 #include "CFigure.h"
+#include <fstream>
 
 class CHexagon : public CFigure
 {
@@ -10,7 +11,10 @@ private:
 	int* pY;
 	int raduis, startR;
 	Point center;
+
+	void SavePoints(ofstream& OutFile);    // saving points async non-blocking
 public:
+	CHexagon();
 	CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;
 	void setPoint(int x, int y);

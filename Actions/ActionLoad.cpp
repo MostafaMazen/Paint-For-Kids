@@ -2,6 +2,8 @@
 #include<fstream>
 #include "../Figures/CFigure.h"
 #include "../Figures/CSquare.h"
+#include "../Figures/CEllipse.h"
+#include "../Figures/CHexagon.h"
 #include "../CMUgraphicsLib/colors.h"
 #include"..\ApplicationManager.h"
 
@@ -65,18 +67,21 @@ void ActionLoad::Execute() {
 	cout << strBackClr << endl;
 	cout << figsCount << endl;
 
-	
+	//!ERROR PRONE AREA	
 	while (figsCount)            //for each line on the file we will read it and determine its type
 	{
 	myFile >> figuerName;
 		if (figuerName == "Square")
 			oldFig = new CSquare;
-	//	//else if (figuer == "Ellipse")
-	//	//	fig = new CEllipse;
+		else if (figuerName == "Ellipse")
+			oldFig = new CEllipse;
+		else if (figuerName == "Hexagon")
+			oldFig = new CHexagon;
 	
 		oldFig->Load(myFile); 
 		pManager->AddFigure(oldFig); 
 		figsCount--;
+
 	}
 	pManager->UpdateInterface();
 	pGUI->PrintMessage("file Loaded ");

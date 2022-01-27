@@ -231,6 +231,7 @@ void ApplicationManager::DeleteSelectedFigures()
 				FigList[j] = FigList[j + 1];
 				if (j + 1 == FigCount) {
 					FigList[j] = NULL;
+					//ERROR PRONE EREA
 				}
 			}
 			i--;

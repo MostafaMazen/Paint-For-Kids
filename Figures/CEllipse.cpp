@@ -1,5 +1,9 @@
 #include "CEllipse.h"
 
+CEllipse::CEllipse()
+{
+}
+
 CEllipse::CEllipse(Point p1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	firstPoint = sFP = p1;
@@ -85,10 +89,65 @@ string CEllipse::getFigData() const
 	return figData;
 }
 
-void CEllipse::Save(ofstream& OutFile)
-{
+
+/////////////////////////////////////////save and load functionality /////////////////////
+void CEllipse::Save(ofstream& myFile) {
+	myFile << "Ellipse" << "\t"
+		<< this->ID << "\t"
+		<< this->firstPoint.x << "\t"
+		<< this->firstPoint.y << "\t"
+		<< this->secondPoint.x << "\t"
+		<< this->secondPoint.y << "\t"
+		<< this->StartAngle << "\t"
+		<< this->EndAngle << "\t"
+		<< this->FigGfxInfo.DrawClr.toHexa() << "\t";
+
+	if (this->FigGfxInfo.isFilled) {
+		myFile << FigGfxInfo.FillClr.toHexa() << "\n";
+	}
+	else {
+		myFile << "NOTFILLED" << "\n";
+	}
 }
 
-void CEllipse::Load(ifstream& Infile)
-{
+void CEllipse::Load(ifstream& myFile) {
+	int id;
+	double sAngle, eAngle;
+	string strDrwClr, strFillClr;
+	Point fPoint;
+	Point sPoint;
+	char* drwClr;
+	char* fillClr;
+
+	myFile >> id >> fPoint.x >> fPoint.y >> sPoint.x >> sPoint.y >> sAngle >> eAngle >> strDrwClr >> strFillClr;
+	// manual casting
+	drwClr = &strDrwClr[0];
+	fillClr = &strFillClr[0];
+	this->firstPoint = fPoint;
+	this->secondPoint = sPoint;
+	this->StartAngle = sAngle;
+	this->EndAngle = eAngle;
+
+	cout << "==============" << endl;
+	cout << strDrwClr << endl;
+	cout << fillClr << endl;
+
+
+
+	color savedColor;
+	int r, g, b;
+	savedColor.hexToRGB(drwClr, r, g, b);
+	ChngDrawClr(color(r, g, b));
+	FigGfxInfo.BorderWdth = UI.PenWidth;
+	Selected = false;
+
+	if (strFillClr == "NOTFILLED") {
+		FigGfxInfo.isFilled = false;
+		cout << "===im not filled==" << endl;
+	}
+	else {
+		savedColor.hexToRGB(fillClr, r, g, b);
+		ChngFillClr(color(r, g, b));
+	}
+
 }

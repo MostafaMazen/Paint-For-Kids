@@ -2,6 +2,7 @@
 #define CELLIPSE_H
 
 #include "CFigure.h"
+#include <fstream>
 
 class CEllipse : public CFigure
 {
@@ -14,7 +15,7 @@ private:
 	int xLength, yLength;
 	int startxLength, startyLength;
 public:
-	//CEllipse(Point,Point,double,double, GfxInfo FigureGfxInfo);
+	CEllipse();
 	CEllipse(Point P1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;
 	void setPoint(int x, int y);

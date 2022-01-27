@@ -4,6 +4,19 @@
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+
+
+void CHexagon::SavePoints(ofstream& OutFile)
+{
+	for (int i = 0; i < 6; i++) {
+		OutFile << pX[i]<<"\t";
+		OutFile << pY[i]<<"\t";
+	}
+}
+CHexagon::CHexagon()
+{
+}
 CHexagon::CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	pX = _pX;
@@ -98,10 +111,65 @@ string CHexagon::getFigData() const
 	return figData;
 }
 
-void CHexagon::Save(ofstream& OutFile)
-{
+/////////////////////////////////////////save and load functionality /////////////////////
+void CHexagon::Save(ofstream& myFile) {
+	myFile << "Hexagon" << "\t"
+		<< this->ID << "\t"
+		<< this->center.x << "\t"
+		<< this->center.y << "\t"
+		<< this->raduis << "\t";
+	SavePoints(myFile);
+	myFile<< this->FigGfxInfo.DrawClr.toHexa() << "\t";
+
+	if (this->FigGfxInfo.isFilled) {
+		myFile << FigGfxInfo.FillClr.toHexa() << "\n";
+	}
+	else {
+		myFile << "NOTFILLED" << "\n";
+	}
 }
 
-void CHexagon::Load(ifstream& Infile)
-{
+void CHexagon::Load(ifstream& myFile) {
+
+	pX = new int[6];
+	pY = new int[6];
+
+	int id,x,y;
+	string strDrwClr, strFillClr;
+	char* drwClr;
+	char* fillClr;
+
+	myFile >> id >> center.x >> center.y >> raduis;
+	for (int i = 0; i < 6; i++) {
+		myFile >> x >> y;
+		pX[i] = x;
+		pY[i] = y;
+	}
+	myFile >> strDrwClr >> strFillClr;
+	// manual casting
+	drwClr = &strDrwClr[0];
+	fillClr = &strFillClr[0];
+
+	cout << "==============" << endl;
+	cout << strDrwClr << endl;
+	cout << fillClr << endl;
+
+
+
+	color savedColor;
+	int r, g, b;
+	savedColor.hexToRGB(drwClr, r, g, b);
+	ChngDrawClr(color(r, g, b));
+	FigGfxInfo.BorderWdth = UI.PenWidth;
+	Selected = false;
+
+	if (strFillClr == "NOTFILLED") {
+		FigGfxInfo.isFilled = false;
+		cout << "===im not filled==" << endl;
+	}
+	else {
+		savedColor.hexToRGB(fillClr, r, g, b);
+		ChngFillClr(color(r, g, b));
+	}
+
 }

@@ -2,6 +2,7 @@
 #define CSQUARE_H
 
 #include "CFigure.h"
+#include <fstream>
 
 class CSquare : public CFigure
 {

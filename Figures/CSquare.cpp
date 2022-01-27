@@ -1,5 +1,4 @@
 #include "CSquare.h"
-#include<fstream>
 
 CSquare::CSquare()
 {
