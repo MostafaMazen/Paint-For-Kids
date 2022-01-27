@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>PT Project</ProjectName>
+    <ProjectGuid>{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)</TargetName>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <ReferencePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(ReferencePath)</ReferencePath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <TypeLibraryName>.\Release/graphics_prj.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release/graphics_prj.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/graphics_prj.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ProgramDatabaseFile>.\Release/graphics_prj.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/graphics_prj.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <TypeLibraryName>.\Debug/graphics_prj.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug/$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Debug/$(TargetName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Actions\ActionAddEllipse.cpp" />
+    <ClCompile Include="Actions\ActionAddHexagon.cpp" />
+    <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionSave.cpp" />
+    <ClCompile Include="Actions\ActionSelectFig.cpp" />
+    <ClCompile Include="Actions\Resize.cpp" />
+    <ClCompile Include="ApplicationFiguresHelperPanel\ApplicationFiguresHelperPanel.cpp" />
+    <ClCompile Include="ApplicationObjectHelperTool\ApplicationObjectHelperTool.cpp" />
+    <ClCompile Include="ApplicationServices\ThreadNotifier.cpp" />
+    <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
+    <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
+    <ClCompile Include="CMUgraphicsLib\image.cpp" />
+    <ClCompile Include="CMUgraphicsLib\jpegload.c" />
+    <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
+    <ClCompile Include="CMUgraphicsLib\mousequeue.cpp" />
+    <ClCompile Include="CMUgraphicsLib\windowinput.cpp" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jcomapi.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jcparam.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdapimin.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdapistd.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdatasrc.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdcoefct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdcolor.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jddctmgr.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdhuff.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdinput.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmainct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmarker.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmaster.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdmerge.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdphuff.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdpostct.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdsample.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jdtrans.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jerror.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctflt.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctfst.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctint.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jidctred.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jmemmgr.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jmemnobs.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
+    <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
+    <ClCompile Include="Figures\CEllipse.cpp" />
+    <ClCompile Include="Figures\CFigure.cpp" />
+    <ClCompile Include="Figures\CHexagon.cpp" />
+    <ClCompile Include="Figures\CSquare.cpp" />
+    <ClCompile Include="Actions\ActionAddSquare.cpp" />
+    <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="imgui-backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="imgui-backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui-includes\imgui.cpp" />
+    <ClCompile Include="imgui-includes\imgui_demo.cpp" />
+    <ClCompile Include="imgui-includes\imgui_draw.cpp" />
+    <ClCompile Include="imgui-includes\imgui_tables.cpp" />
+    <ClCompile Include="imgui-includes\imgui_widgets.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseState\MouseStateEventHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actions\ActionAddEllipse.h" />
+    <ClInclude Include="Actions\ActionAddHexagon.h" />
+    <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionSave.h" />
+    <ClInclude Include="Actions\ActionSelectFig.h" />
+    <ClInclude Include="Actions\Resize.h" />
+    <ClInclude Include="ApllicationManagerState\Header1.h" />
+    <ClInclude Include="ApplicationFiguresHelperPanel\ApplicationFiguresHelperPanel.h" />
+    <ClInclude Include="ApplicationObjectHelperTool\ApplicationObjectHelperTool.h" />
+    <ClInclude Include="ApplicationServices\ThreadEvenHandler.h" />
+    <ClInclude Include="ApplicationServices\ThreadNotifier.h" />
+    <ClInclude Include="CMUgraphicsLib\auxil.h" />
+    <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
+    <ClInclude Include="CMUgraphicsLib\colors.h" />
+    <ClInclude Include="CMUgraphicsLib\error.h" />
+    <ClInclude Include="CMUgraphicsLib\image.h" />
+    <ClInclude Include="CMUgraphicsLib\jpegload.h" />
+    <ClInclude Include="CMUgraphicsLib\keyqueue.h" />
+    <ClInclude Include="CMUgraphicsLib\mousequeue.h" />
+    <ClInclude Include="CMUgraphicsLib\version.h" />
+    <ClInclude Include="CMUgraphicsLib\windowinput.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jconfig.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdct.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jdhuff.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jerror.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jinclude.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmemsys.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jmorecfg.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
+    <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="Figures\CEllipse.h" />
+    <ClInclude Include="Figures\CFigure.h" />
+    <ClInclude Include="Figures\CHexagon.h" />
+    <ClInclude Include="Figures\CSquare.h" />
+    <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\ActionAddSquare.h" />
+    <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="GUI\UI_Info.h" />
+    <ClInclude Include="ApplicationManager.h" />
+    <ClInclude Include="DEFS.h" />
+    <ClInclude Include="imgui-backends\imgui_impl_dx9.h" />
+    <ClInclude Include="imgui-backends\imgui_impl_win32.h" />
+    <ClInclude Include="imgui-includes\imconfig.h" />
+    <ClInclude Include="imgui-includes\imgui.h" />
+    <ClInclude Include="imgui-includes\imgui_internal.h" />
+    <ClInclude Include="imgui-includes\imstb_rectpack.h" />
+    <ClInclude Include="imgui-includes\imstb_textedit.h" />
+    <ClInclude Include="imgui-includes\imstb_truetype.h" />
+    <ClInclude Include="MouseState\MouseStateEventHandler.h" />
+    <ClInclude Include="MouseState\MouseStateNotifier.h" />
+    <ClInclude Include="MouseState\MouseStatesUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="NewFile.txt" />
+    <Text Include="NewFile1.txt" />
+    <Text Include="NewFile2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\MenuItems\Menu_Elps.jpg" />
+    <Image Include="images\MenuItems\Menu_Exit.jpg" />
+    <Image Include="images\MenuItems\Menu_Sqr.JPG" />
+    <Image Include="images\MenuItems\open.jpg" />
+    <Image Include="images\MenuItems\Resize.jpeg" />
+    <Image Include="images\MenuItems\Resize.jpg" />
+    <Image Include="images\MenuItems\resize.png" />
+    <Image Include="images\MenuItems\save.jpg" />
+    <Image Include="images\MenuItems\square.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
