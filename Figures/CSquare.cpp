@@ -12,7 +12,7 @@ CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo
 	//setCenterPoint(x, y);
 	length = len;
 	startLength = length;
-	factorPosition = 2;
+	//factorPosition = 2;
 }
 
 void CSquare::setPoint(int x, int y)
@@ -99,6 +99,9 @@ void CSquare::Load(ifstream& myFile) {
 	char* fillClr;
 
 	myFile >> id >> topleft.x >> topleft.y >> length >> strDrwClr >> strFillClr;
+
+	startLength = length;
+
 	//manual casting
 	drwClr = &strDrwClr[0];
 	fillClr = &strFillClr[0];

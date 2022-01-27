@@ -16,7 +16,7 @@ protected:
 	/// Add more parameters if needed.
 
 public:
-	int factorPosition;
+	int factorPosition = 2;
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
 	void SetSelected(bool );	//select/unselect the figure

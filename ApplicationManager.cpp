@@ -31,8 +31,8 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 			pGUI->PrintMessage("The Selected Figures have been Deleted!");
 			pGUI->ClearDrawArea();
 			UpdateInterface();
-			data.delKey = 0;
 		}
+		data.delKey = 0;
 		cout << "Delete-Key pressed" << endl;
 	}
 

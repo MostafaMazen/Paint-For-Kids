@@ -120,6 +120,7 @@ void CEllipse::Load(ifstream& myFile) {
 	char* fillClr;
 
 	myFile >> id >> fPoint.x >> fPoint.y >> sPoint.x >> sPoint.y >> sAngle >> eAngle >> strDrwClr >> strFillClr;
+
 	// manual casting
 	drwClr = &strDrwClr[0];
 	fillClr = &strFillClr[0];
@@ -127,6 +128,16 @@ void CEllipse::Load(ifstream& myFile) {
 	this->secondPoint = sPoint;
 	this->StartAngle = sAngle;
 	this->EndAngle = eAngle;
+
+	sFP = firstPoint;
+	sSP = secondPoint;
+
+	xLength = secondPoint.x - firstPoint.x;
+	yLength = secondPoint.y - firstPoint.y;
+
+	startxLength = xLength;
+	startyLength = yLength;
+
 
 	cout << "==============" << endl;
 	cout << strDrwClr << endl;

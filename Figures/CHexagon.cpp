@@ -140,6 +140,7 @@ void CHexagon::Load(ifstream& myFile) {
 	char* fillClr;
 
 	myFile >> id >> center.x >> center.y >> raduis;
+	startR = raduis;
 	for (int i = 0; i < 6; i++) {
 		myFile >> x >> y;
 		pX[i] = x;
