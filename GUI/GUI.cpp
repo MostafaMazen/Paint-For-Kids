@@ -143,6 +143,7 @@ std::map<window*, MouseStateNotifier*> GUI::CreateWind(int w, int h, int x, int 
 }
 MouseStateNotifier* GUI::getMouseState()
 {
+	//
 	return mouseState;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
