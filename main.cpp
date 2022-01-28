@@ -7,13 +7,15 @@
 
 class ThreadNotifier;
 
+
+
 //::NEW AGENDA FRIDAY::
 /*
 	Planning the game : 
-	1- what i need ?  i need when i click on the switch button a new menu get generate ! 
-	2- load the gameFile.text to the drawing area with new functionalty 
-	3- allow the child or the user to pick mode before touch the board 
-	4- after picking the mod that he will follow allow him to pick the first shape [CFigure] from all the figs on the screen 
+	1- [x] what i need ?  i need when i click on the switch button a new menu get generate ! 
+	2- [x] load the gameFile.text to the drawing area with new functionalty 
+	3- [x] allow the child or the user to pick mode before touch the board 
+	4- [x] after picking the mod that he will follow allow him to pick the first shape [CFigure] from all the figs on the screen 
 	5- make this fig gisappear then allow him to pick another figs according to the mode that he already has picked ! 
 	6- if he picked well we will add the correct to a counter or something else we will add falsy picks to another counter 
 	7- after trying [don't know yet if it will be infinte or number of tries ?] 
@@ -36,6 +38,10 @@ class ThreadNotifier;
 	
 
 */
+
+
+
+
 
 
 

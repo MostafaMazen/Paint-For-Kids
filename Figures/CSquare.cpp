@@ -1,8 +1,12 @@
 #include "CSquare.h"
 
+
+
+
 CSquare::CSquare()
 {
 }
+
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
@@ -128,6 +132,11 @@ void CSquare::Load(ifstream& myFile) {
 		ChngFillClr(color(r, g, b));
 	}
 
+}
+
+std::string CSquare::getShapeType()
+{
+	return "SQUARE";
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

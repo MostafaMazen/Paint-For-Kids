@@ -14,6 +14,7 @@ private:
 	double  EndAngle;
 	int xLength, yLength;
 	int startxLength, startyLength;
+	static std::string SHAPE_TYPE;
 public:
 	CEllipse();
 	CEllipse(Point P1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo);
@@ -26,7 +27,9 @@ public:
 	virtual string getFigData() const;
 	virtual void Save(ofstream& OutFile);	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile);	//Load the figure parameters to the file
-
+	virtual std::string getShapeType();
 };
+
+
 
 #endif

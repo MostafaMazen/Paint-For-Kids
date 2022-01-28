@@ -6,7 +6,6 @@
 #endif
 
 
-
 void CHexagon::SavePoints(ofstream& OutFile)
 {
 	for (int i = 0; i < 6; i++) {
@@ -179,4 +178,9 @@ void CHexagon::Load(ifstream& myFile) {
 		ChngFillClr(color(r, g, b));
 	}
 
+}
+
+std::string CHexagon::getShapeType()
+{
+	return "HEXAGON";
 }

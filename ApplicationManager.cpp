@@ -184,6 +184,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FIG_TYPE_SELECTED" << std::endl;
+				//create the action here 				
 				isPlaying = true;
 			}
 			break;
@@ -191,6 +192,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FILL_COLOR_SELECTED" << std::endl;
+				//create the action here 
 				isPlaying = true;
 			}
 			break;

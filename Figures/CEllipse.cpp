@@ -1,5 +1,6 @@
 #include "CEllipse.h"
 
+
 CEllipse::CEllipse()
 {
 }
@@ -161,4 +162,9 @@ void CEllipse::Load(ifstream& myFile) {
 		ChngFillClr(color(r, g, b));
 	}
 
+}
+
+std::string CEllipse::getShapeType()
+{
+	return "ELLIPSE";
 }

@@ -25,6 +25,11 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr;
 }
 
+std::string CFigure::getShapeType()
+{
+	return "PARENT_SHAPE";
+}
+
 CFigure* returnFig(void* fig) {
 	return (CFigure*)fig;
 }
