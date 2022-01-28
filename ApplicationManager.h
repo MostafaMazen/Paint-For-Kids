@@ -34,7 +34,6 @@ private:
 	ApplicationManagerState* appManagerState;
 	//Pointers to Input and Output classes
 	GUI* pGUI;
-	bool isPlaying; // isPlaying , all game mode icons no more listen 
 	
 public:
 
@@ -44,6 +43,7 @@ public:
 		std::string figColor;
 		int correctAns, wrongAns;
 		int gameMode; // start playing the game 
+		bool isPlaying;
 	};
 
 	GameStates gameStates;
@@ -69,7 +69,6 @@ public:
 	virtual void onMessageRecieved(PanelListener* panelListen);
 	ApplicationManager(ThreadNotifier* threadNoti);
 	~ApplicationManager();
-	void resetPlayingFlag();
 	void Run();		//to run the application
 
 	// -- Action-Related Functions
@@ -90,5 +89,7 @@ public:
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
+
+	void resetGame();
 
 };

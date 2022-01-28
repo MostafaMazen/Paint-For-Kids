@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ActionSelectFig.h"
-
+#include "ActionLoadGame.h"
 
 
 ActionSelectFig::ActionSelectFig(ApplicationManager* pApp, CFigure* fig):Action(pApp)
@@ -25,6 +25,7 @@ void ActionSelectFig::Execute()
 				/* Check play mode */
 				if (pManager->gameStates.gameMode == -1) {
 					MessageBox(pManager->GetGUI()->pWind->getWindow(), "Please select Game mode first", "Alert", MB_OKCANCEL);
+					break;
 				}else if (pManager->gameStates.gameMode == GAME_MODE_FIGTYPE) {
 					if (pManager->gameStates.figType == "") {
 						pManager->gameStates.figType = figList[i]->getShapeType();
@@ -42,6 +43,9 @@ void ActionSelectFig::Execute()
 							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
 							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
 							cout << "C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns)<<endl;
+							pManager->resetGame();
+							Action* reloadGame = new ActionLoadGame(pManager);
+							pManager->ExecuteAction(reloadGame);
 						}
 					}
 				}
@@ -62,6 +66,9 @@ void ActionSelectFig::Execute()
 							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
 							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
 							cout << "C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns)<<endl;
+							pManager->resetGame();
+							Action* reloadGame = new ActionLoadGame(pManager);
+							pManager->ExecuteAction(reloadGame);
 						}
 					}
 				}
@@ -84,6 +91,9 @@ void ActionSelectFig::Execute()
 							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
 							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
 							cout << "C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns) << endl;
+							pManager->resetGame();
+							Action* reloadGame = new ActionLoadGame(pManager);
+							pManager->ExecuteAction(reloadGame);
 						}
 					}
 				}

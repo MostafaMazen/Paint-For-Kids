@@ -78,13 +78,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 {
 	this->threadNoti = threadNoti;
 
-	gameStates.gameMode = -1;
-	gameStates.validShapesCount = 0;
-	gameStates.inValidShapesCount = 0;
-	gameStates.figType = "";
-	gameStates.correctAns = 0;
-	gameStates.wrongAns = 0;
-	gameStates.figColor = "";
+	resetGame();
 
 	//threadNoti->on("PANEL_START", this);
 
@@ -108,7 +102,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	this->threadNoti->on("PANEL_START", this);
 	this->threadNoti->on("PANEL_CLOSE", this);
 	this->threadNoti->on("PANEL_CHANGE_COLOR", this);
-	this->isPlaying = false;
+
 	//initializing intial appMode state 
 	UI.InterfaceMode = MODE_DRAW; // INTIAL STATE
 
@@ -196,26 +190,35 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			break;
 		case GAME_MODE_FIGTYPE:
 			/* Add action for this mode */
-			if (!isPlaying) {
+			if (!gameStates.isPlaying) {
 				std::cout << "GAME_MODE_FIG_TYPE_SELECTED" << std::endl;
 				gameStates.gameMode = GAME_MODE_FIGTYPE;
-				isPlaying = true;
+				gameStates.isPlaying = true;
+			}
+			else {
+				MessageBox(pGUI->pWind->getWindow(), "Please complete the game first to change the mode.", "Alert", MB_OKCANCEL);
 			}
 			break;
 		case GAME_MODE_FILLCOLOR:
 			/* Add action for this mode */
-			if (!isPlaying) {
+			if (!gameStates.isPlaying) {
 				std::cout << "GAME_MODE_FILL_COLOR_SELECTED" << std::endl;
 				gameStates.gameMode = GAME_MODE_FILLCOLOR;
-				isPlaying = true;
+				gameStates.isPlaying = true;
+			}
+			else {
+				MessageBox(pGUI->pWind->getWindow(), "Please complete the game first to change the mode.", "Alert", MB_OKCANCEL);
 			}
 			break;
 		case GAME_MODE_TYPE_AND_FILL:
 			/* Add action for this mode */
-			if (!isPlaying) {
+			if (!gameStates.isPlaying) {
 				std::cout << "GAME_MODE_FILL_TYPE_SELECTED" << std::endl;
 				gameStates.gameMode = GAME_MODE_TYPE_AND_FILL;
-				isPlaying = true;
+				gameStates.isPlaying = true;
+			}
+			else {
+				MessageBox(pGUI->pWind->getWindow(), "Please complete the game first to change the mode.", "Alert", MB_OKCANCEL);
 			}
 			break;
 		case EXIT:
@@ -405,6 +408,18 @@ void ApplicationManager::UpdateInterface() const
 
 }
 
+void ApplicationManager::resetGame()
+{
+	gameStates.gameMode = -1;
+	gameStates.validShapesCount = 0;
+	gameStates.inValidShapesCount = 0;
+	gameStates.figType = "";
+	gameStates.correctAns = 0;
+	gameStates.wrongAns = 0;
+	gameStates.figColor = "";
+	gameStates.isPlaying = false;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the interface
 GUI *ApplicationManager::GetGUI() const
@@ -417,11 +432,6 @@ ApplicationManager::~ApplicationManager()
 		delete FigList[i];
 	delete pGUI;
 	
-}
-
-void ApplicationManager::resetPlayingFlag()
-{	
-	isPlaying = false;
 }
 
 static std::mutex s_mutex;
