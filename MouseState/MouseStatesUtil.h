@@ -9,4 +9,5 @@ struct MouseStPoint {
     bool mouseDown;
     int delKey=0;
     int ctrlKey = 0;
+    std::string msg;
 };

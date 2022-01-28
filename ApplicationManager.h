@@ -23,6 +23,7 @@ class ApplicationManager: public MouseEventHandler, public ThreadEventsHandler
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
+	std::string msg;
 	PanelListener pl;
 	bool flag;
 	//bool targetObjSelected;

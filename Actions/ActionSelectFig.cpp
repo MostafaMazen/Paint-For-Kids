@@ -37,7 +37,7 @@ void ActionSelectFig::Execute()
 							pManager->gameStates.wrongAns++;
 						}
 						if (pManager->gameStates.correctAns == pManager->gameStates.validShapesCount - 1) {
-							/* Dsplay Message */
+							/* Display Message */
 							std::string message = "Game Finished C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns);
 							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
 							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
@@ -57,11 +57,33 @@ void ActionSelectFig::Execute()
 							pManager->gameStates.wrongAns++;
 						}
 						if (pManager->gameStates.correctAns == pManager->gameStates.validShapesCount - 1) {
-							/* Dsplay Message */
+							/* Display Message */
 							std::string message = "Game Finished C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns);
 							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
 							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
 							cout << "C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns)<<endl;
+						}
+					}
+				}
+				else if (pManager->gameStates.gameMode == GAME_MODE_TYPE_AND_FILL) {
+					if (pManager->gameStates.figColor == "" && pManager->gameStates.figType == "") {
+						pManager->gameStates.figColor = figList[i]->getColor();
+						pManager->gameStates.figType = figList[i]->getShapeType();
+						pManager->gameMachineValidCount(GAME_MODE_TYPE_AND_FILL);
+					}
+					else {
+						if (figList[i]->getColor() == pManager->gameStates.figColor && figList[i]->getShapeType() == pManager->gameStates.figType) {
+							pManager->gameStates.correctAns++;
+						}
+						else {
+							pManager->gameStates.wrongAns++;
+						}
+						if (pManager->gameStates.correctAns == pManager->gameStates.validShapesCount - 1) {
+							/* Display Message */
+							std::string message = "Game Finished C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns);
+							MessageBox(pManager->GetGUI()->pWind->getWindow(), message.c_str(), "Alert", MB_OKCANCEL);
+							pManager->GetGUI()->PrintMessage("C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns));
+							cout << "C: " + to_string(pManager->gameStates.correctAns) + " , R: " + to_string(pManager->gameStates.wrongAns) << endl;
 						}
 					}
 				}

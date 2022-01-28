@@ -20,6 +20,8 @@ private:
 	MouseEventHandler* mouseDown;
 	MouseEventHandler* mouseMove;
 	MouseEventHandler* mouseUp;
+
+	MouseStPoint mStP;
 	
 public:	
 	window* pWind;	//Pointer to the Graphics Window
@@ -31,7 +33,7 @@ public:
 	MouseStateNotifier* getMouseState();
 	/////////// Input Functoinality  /////////////////
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
-	string GetSrting() const ;	 //Returns a string entered by the user
+	string GetSrting() ;	 //Returns a string entered by the user
 	ActionType MapInputToActionType(int& x, int& y) const; //Read the user click and map to an action
 
 
@@ -49,7 +51,7 @@ public:
 	///TODO: Make similar functions for drawing all other figures.
 	void DrawEllipse(Point P1, Point p2, double StartAngle, double EndAngle, GfxInfo EllipseGfxInfo, bool selected) const;//Draw an Ellipse
 	void DrawHexagon(int* pX, int* pY, GfxInfo RectGfxInfo, bool selected) const;
-	void PrintMessage(string msg) const;	//Print a message on Status bar
+	void PrintMessage(string msg);	//Print a message on Status bar
 
 	color getCrntBackgroundColor()const;
 	color getCrntDrawColor() const;	//get current drwawing color

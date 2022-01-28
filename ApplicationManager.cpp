@@ -23,6 +23,10 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 		std::async(std::launch::async, &ApplicationManager::UpdateInterface,this);
 	}
 
+	/**/
+	if (data.msg != "") {
+		msg = data.msg;
+	}
 	// case delete button is pressed
 	if (data.delKey == 1) {
 		// check if there is any selected figure
@@ -99,6 +103,8 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	mouseState->on("DELETE_KEY", this);
 	mouseState->on("WIN_SIZING", this);
 	mouseState->on("WIN_PAINTING", this);
+	mouseState->on("MSG_CHANGE", this);
+
 	this->threadNoti->on("PANEL_START", this);
 	this->threadNoti->on("PANEL_CLOSE", this);
 	this->threadNoti->on("PANEL_CHANGE_COLOR", this);
@@ -204,7 +210,14 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 				isPlaying = true;
 			}
 			break;
-
+		case GAME_MODE_TYPE_AND_FILL:
+			/* Add action for this mode */
+			if (!isPlaying) {
+				std::cout << "GAME_MODE_FILL_TYPE_SELECTED" << std::endl;
+				gameStates.gameMode = GAME_MODE_TYPE_AND_FILL;
+				isPlaying = true;
+			}
+			break;
 		case EXIT:
 			if (MessageBox(pGUI->pWind->getWindow(), "Are you sure?", "Close", MB_OKCANCEL) == IDOK)
 			{
@@ -264,6 +277,17 @@ void ApplicationManager::gameMachineValidCount(int PLAY_MODE)
 		//TODO error prone area
 		for (int i = 0; i < FigCount; i++) {
 			if (FigList[i]->getColor() == gameStates.figColor) {
+				gameStates.validShapesCount++;
+			}
+			else {
+				gameStates.inValidShapesCount++;
+			}
+		}
+		break;
+	case GAME_MODE_TYPE_AND_FILL:
+		//TODO error prone area
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->getColor() == gameStates.figColor && FigList[i]->getShapeType() == gameStates.figType) {
 				gameStates.validShapesCount++;
 			}
 			else {
@@ -364,7 +388,6 @@ void ApplicationManager::UnSelectAllFigs() const
 void ApplicationManager::UpdateInterface() const
 {		
 	std::cout << UI.InterfaceMode << std::endl;
-
 	if (UI.InterfaceMode == MODE_PLAY) {
 		pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
 	}
@@ -377,6 +400,8 @@ void ApplicationManager::UpdateInterface() const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 	pGUI->CreateStatusBar();
+
+	pGUI->PrintMessage(msg);
 
 }
 

@@ -296,5 +296,6 @@
     <Image Include="images\MenuItems\square.png" />
     <Image Include="images\MenuItems\save.jpg" />
     <Image Include="images\MenuItems\open.jpg" />
+    <Image Include="images\MenuItems\collage.jpg" />
   </ItemGroup>
 </Project>

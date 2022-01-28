@@ -32,6 +32,8 @@ GUI::GUI()
 	pWind = window_mouseState_map.begin()->first;
 	mouseState = window_mouseState_map[pWind];
 
+	mStP.msg = "";
+
 	/*mouseDown = new OnDown(appMngState);
 	mouseMove = new OnMove(appMngState, appManger);
 	mouseUp = new OnUp(appMngState);*/
@@ -60,7 +62,7 @@ void GUI::GetPointClicked(int &x, int &y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-string GUI::GetSrting() const 
+string GUI::GetSrting() 
 {
 	string Label;
 	char Key;
@@ -133,6 +135,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			{
 			case ITM_PICK_FIGURETYPE: return GAME_MODE_FIGTYPE;
 			case ITM_PICK_FILLCOLOR: return GAME_MODE_FILLCOLOR;
+			case ITM_PICK_FILL_TYPE: return GAME_MODE_TYPE_AND_FILL;
 			case ITM_SWITCH2DRAW: return TO_PLAY_DRAW_TOGGLE;
 			case ITM_EXIT2: return EXIT;
 
@@ -235,6 +238,7 @@ void GUI::CreateDrawToolBar() const
 		string MenuItemImages[PLAY_ITM_COUNT];
 		MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
 		MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
+		MenuItemImages[ITM_PICK_FILL_TYPE] = "images\\MenuItems\\collage.jpg";
 		MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch.jpg";
 		MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
 		//TODO: Prepare images for each menu item and add it to the list
@@ -298,8 +302,10 @@ void GUI::ClearDrawArea() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void GUI::PrintMessage(string msg) const	//Prints a message on status bar
+void GUI::PrintMessage(string msg)	//Prints a message on status bar
 {
+	mStP.msg = msg;
+	mouseState->emit("MSG_CHANGE", mStP);
 	ClearStatusBar();	//First clear the status bar
 	
 	pWind->SetPen(UI.MsgColor, 50);

@@ -261,6 +261,7 @@
     <Text Include="NewFile2.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\MenuItems\collage.jpg" />
     <Image Include="images\MenuItems\Menu_Elps.jpg" />
     <Image Include="images\MenuItems\Menu_Exit.jpg" />
     <Image Include="images\MenuItems\Menu_Sqr.JPG" />
