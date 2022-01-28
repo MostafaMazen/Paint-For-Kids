@@ -54,7 +54,9 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 void ApplicationManager::onMessageRecieved(PanelListener* panelListen)
 {
 	if (GetSelectedFigure() != -1 && panelListen->stat == PANEL_OPEN) {
-		panelListen->appPanelMngr->launchPanal();
+		if (UI.InterfaceMode == MODE_DRAW) {
+			panelListen->appPanelMngr->launchPanal();
+		}
 	}
 	else if (GetSelectedFigure() != -1 && panelListen->stat == PANEL_CLOSE) {
 		FigList[GetSelectedFigure()]->SetSelected(false);
@@ -236,11 +238,14 @@ void ApplicationManager::DeleteSelectedFigures()
 {
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsSelected()) {
+			delete FigList[i];
 			for (int j = i; j < FigCount; j++) {
 				FigList[j] = FigList[j + 1];
 				if (j + 1 == FigCount) {
+
 					FigList[j] = NULL;
 					//ERROR PRONE EREA
+
 				}
 			}
 			i--;

@@ -7,7 +7,9 @@
 
 class ActionToPlayDrawToggle :public Action
 {
-public:
-	ActionToPlayDrawToggle(ApplicationManager* pApp);
-	virtual void Execute();
+	private:
+		ApplicationManager* appMngr;
+	public:
+		ActionToPlayDrawToggle(ApplicationManager* pApp);
+		virtual void Execute();
 };

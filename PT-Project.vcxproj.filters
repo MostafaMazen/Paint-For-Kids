@@ -165,6 +165,7 @@
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionToPlayToDrawToggle.cpp" />
+    <ClCompile Include="Actions\ActionLoadGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -274,6 +275,7 @@
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionToPlayToDrawToggle.h" />
+    <ClInclude Include="Actions\ActionLoadGame.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewFile.txt" />

@@ -26,6 +26,12 @@ CHexagon::CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo Figur
 	factorPosition = 2;
 }
 
+CHexagon::~CHexagon()
+{
+		delete [] pX;
+		delete [] pY;
+}
+
 
 
 void CHexagon::DrawMe(GUI* pGUI) const

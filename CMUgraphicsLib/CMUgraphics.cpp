@@ -343,6 +343,8 @@ hInstance(GetModuleHandle(0)), iWindowWidth(iWindWidth), iWindowHeight(iWindHeig
 
 window::~window() {
 
+	delete mouseState;
+
     int iX, iY;
 
     if(dcScreen != NULL) {

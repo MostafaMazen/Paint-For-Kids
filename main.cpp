@@ -125,17 +125,16 @@ int main()
 	/*
 	GUI* g=new GUI();
 	
-	
 	window* w=g->CreateWind(200, 300, 10, 10);
 	int x, y;
 	w->WaitMouseClick(x, y);
 	*/
 	
-	ThreadNotifier* threadNoti = new ThreadNotifier();
-	cout << "From Main: " << threadNoti << std::endl;
+	ThreadNotifier threadNoti;
+	cout << "From Main: " << &threadNoti << std::endl;
 	cout <<"From Main ThreeadID: "<< this_thread::get_id() << std::endl;
-	auto appManagerThread = runAppManagerThread(threadNoti); // waiting for arguments
-	auto panalThread = runPanalThread(threadNoti); // waiting for arguments
+	auto appManagerThread = runAppManagerThread(&threadNoti); // waiting for arguments
+	auto panalThread = runPanalThread(&threadNoti); // waiting for arguments
 
 	std::cout << "watch" << std::endl;
 
