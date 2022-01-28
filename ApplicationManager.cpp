@@ -74,7 +74,13 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 {
 	this->threadNoti = threadNoti;
 
-	gameMode = -1;
+	gameStates.gameMode = -1;
+	gameStates.validShapesCount = 0;
+	gameStates.inValidShapesCount = 0;
+	gameStates.figType = "";
+	gameStates.correctAns = 0;
+	gameStates.wrongAns = 0;
+	gameStates.figColor = color(0, 0, 0);
 
 	//threadNoti->on("PANEL_START", this);
 
@@ -186,7 +192,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FIG_TYPE_SELECTED" << std::endl;
-				gameMode = GAME_MODE_FIGTYPE;
+				gameStates.gameMode = GAME_MODE_FIGTYPE;
 				isPlaying = true;
 			}
 			break;
@@ -194,7 +200,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FILL_COLOR_SELECTED" << std::endl;
-				gameMode = GAME_MODE_FILLCOLOR;
+				gameStates.gameMode = GAME_MODE_FILLCOLOR;
 				isPlaying = true;
 			}
 			break;
@@ -237,6 +243,18 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 int ApplicationManager::getFigCount()
 {
 	return FigCount;
+}
+
+void ApplicationManager::gameMachineValidCount(std::string figType)
+{
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->getShapeType() == figType) {
+			gameStates.validShapesCount++;
+		}
+		else {
+			gameStates.inValidShapesCount++;
+		}
+	}
 }
 
 CFigure** ApplicationManager::getFigList()

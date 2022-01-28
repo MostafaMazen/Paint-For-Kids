@@ -11,6 +11,7 @@
 ActionLoadGame::ActionLoadGame(ApplicationManager* pApp) :Action(pApp)
 {
 	GameFileName = "GameFile.txt";
+	//GameFileName = "f1.txt";
 }
 
 void ActionLoadGame::Execute() {

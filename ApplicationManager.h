@@ -37,7 +37,15 @@ private:
 	
 public:
 
-	int gameMode; // start playing the game 
+	struct GameStates {
+		int validShapesCount, inValidShapesCount;
+		std::string figType;
+		color figColor;
+		int correctAns, wrongAns;
+		int gameMode; // start playing the game 
+	};
+
+	GameStates gameStates;
 
 	//for (MULTI SELECT)
 	int ctrlState;      // ctrl button state used in select action
@@ -69,6 +77,7 @@ public:
 	
 	// -- Figures Management Functions
 	int getFigCount();				// get current figures count
+	void gameMachineValidCount(std::string figType);	// calculate valid shapes and in valid shapes
 	CFigure** getFigList();			// get all figures
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	void deleteFigure(CFigure* pFig);	// delete specific figure

@@ -11,8 +11,6 @@ class ApplicationFiguresHelperPanelManager;
 class ActionSelectFig : public Action
 {
 	CFigure* figure;
-
-	std::string figType;
 	
 public:
 	ActionSelectFig(ApplicationManager*, CFigure*);
