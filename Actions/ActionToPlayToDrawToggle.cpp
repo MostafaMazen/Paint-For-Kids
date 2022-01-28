@@ -10,7 +10,7 @@ void ActionToPlayDrawToggle::Execute()
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
 
-	//make this button toggling 
+	//make this button toggling
 	//THIS SUPPOSE TO WORK ONLY AS TOGGLING 
 	if (UI.InterfaceMode == MODE_DRAW) {
 		UI.InterfaceMode = MODE_PLAY;

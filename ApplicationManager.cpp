@@ -96,7 +96,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	this->threadNoti->on("PANEL_CHANGE_COLOR", this);
 
 	//initializing intial appMode state 
-	UI.InterfaceMode = MODE_DRAW; // INTIAL STATE 
+	UI.InterfaceMode = MODE_DRAW; // INTIAL STATE
 
 
 	//Create an array of figure pointers and set them to NULL		
@@ -288,43 +288,21 @@ void ApplicationManager::UnSelectAllFigs() const
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
-
-	/// <summary>
-	///		Update for game mode
-	/// </summary>
-	/// UI can feel the action changes 	
+{		
 	std::cout << UI.InterfaceMode << std::endl;
-	switch (UI.InterfaceMode) {
-	case MODE_DRAW:
-		pGUI->CreateDrawToolBar();
-		if (GetSelectedFigure() != -1) {
-			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
-		}
-		pGUI->ClearDrawArea();
-		for (int i = 0; i < FigCount; i++)
-			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-		pGUI->CreateStatusBar();
-		break;
-	case MODE_PLAY:
-		std::cout << "handle the on MODE_PLAY screen update !" << std::endl;
-		/*
-			HERE WE WILL UPDATE THE DRAWING AREA AND STATUS BAR AND THE TOOLBAR 
-			ACCORDING TO THE USER CLICKS 
-		*/
+
+	if (UI.InterfaceMode == MODE_PLAY) {
 		pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
-		pGUI->CreateDrawToolBar();
-		if (GetSelectedFigure() != -1) {
-			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
-		}
-		pGUI->ClearDrawArea();
-		for (int i = 0; i < FigCount; i++)
-			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-		pGUI->CreateStatusBar();
-		break;
-	default:
-		break;
 	}
+
+	pGUI->CreateDrawToolBar();
+	if (GetSelectedFigure() != -1) {
+		pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
+	}
+	pGUI->ClearDrawArea();
+	for (int i = 0; i < FigCount; i++)
+		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	pGUI->CreateStatusBar();
 
 }
 
