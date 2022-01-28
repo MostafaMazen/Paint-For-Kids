@@ -131,6 +131,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 
 			switch (ClickedItemOrder)
 			{
+			case ITM_PICK_FIGURETYPE: return GAME_MODE_FIGTYPE;
+			case ITM_PICK_FILLCOLOR: return GAME_MODE_FILLCOLOR;
 			case ITM_SWITCH2DRAW: return TO_PLAY_DRAW_TOGGLE;
 			case ITM_EXIT2: return EXIT;
 

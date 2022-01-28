@@ -27,7 +27,10 @@ enum ActionType //The actions supported (you can add more if needed)
 	EMPTY,			//A click on empty place in the toolbar
 
 	TO_DRAW,		//Switch interface to Draw mode
-	TO_PLAY_DRAW_TOGGLE			//Switch interface to Play mode
+	TO_PLAY_DRAW_TOGGLE,			//Switch interface to Play mode
+	GAME_MODE_FIGTYPE,		// set game mode to fig type only
+	GAME_MODE_FILLCOLOR,	// set game mode to fig fill color only
+	GAME_MODE_TYPE_AND_FILL,	// set game mode to fig type and fill color
 
 	///TODO: Add more action types (if needed)
 };

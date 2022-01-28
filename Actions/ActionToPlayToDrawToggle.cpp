@@ -20,7 +20,7 @@ void ActionToPlayDrawToggle::Execute()
 	else {
 		UI.InterfaceMode = MODE_DRAW;
 		//appmng delete all the figs from the list 
+		appMngr->resetPlayingFlag();
 		appMngr->RemoveAllFigs();
-	}	
-	//pGUI->ClearDrawArea();
+	}
 }

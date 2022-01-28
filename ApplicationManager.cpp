@@ -94,7 +94,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	this->threadNoti->on("PANEL_START", this);
 	this->threadNoti->on("PANEL_CLOSE", this);
 	this->threadNoti->on("PANEL_CHANGE_COLOR", this);
-
+	this->isPlaying = false;
 	//initializing intial appMode state 
 	UI.InterfaceMode = MODE_DRAW; // INTIAL STATE
 
@@ -103,7 +103,6 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
 }
-
 void ApplicationManager::Run()
 {
 	do
@@ -181,6 +180,20 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 		case TO_PLAY_DRAW_TOGGLE:
 			newAct = new ActionToPlayDrawToggle(this);
 			break;
+		case GAME_MODE_FIGTYPE:
+			/* Add action for this mode */
+			if (!isPlaying) {
+				std::cout << "GAME_MODE_FIG_TYPE_SELECTED" << std::endl;
+				isPlaying = true;
+			}
+			break;
+		case GAME_MODE_FILLCOLOR:
+			/* Add action for this mode */
+			if (!isPlaying) {
+				std::cout << "GAME_MODE_FILL_COLOR_SELECTED" << std::endl;
+				isPlaying = true;
+			}
+			break;
 
 		case EXIT:
 			if (MessageBox(pGUI->pWind->getWindow(), "Are you sure?", "Close", MB_OKCANCEL) == IDOK)
@@ -242,10 +255,8 @@ void ApplicationManager::DeleteSelectedFigures()
 			for (int j = i; j < FigCount; j++) {
 				FigList[j] = FigList[j + 1];
 				if (j + 1 == FigCount) {
-
 					FigList[j] = NULL;
 					//ERROR PRONE EREA
-
 				}
 			}
 			i--;
@@ -320,6 +331,11 @@ ApplicationManager::~ApplicationManager()
 	
 }
 
+void ApplicationManager::resetPlayingFlag()
+{	
+	isPlaying = false;
+}
+
 static std::mutex s_mutex;
 //add and load functionality //////////////////////////////////////////////////////////
 std::string ApplicationManager::saveFile(HWND hwnd) {
@@ -364,11 +380,11 @@ std::string ApplicationManager::openFile(HWND hwnd)
 	return result;
 }
 
-
 void ApplicationManager::SaveFigs(ofstream& file) {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(file);
 }
+
 void ApplicationManager::RemoveAllFigs()  //for each figure FigList, make it points to NULL 
 {
 	for (int i = 0; i < FigCount; ++i)
