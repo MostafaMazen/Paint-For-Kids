@@ -1,7 +1,7 @@
 #include"ActionModeFillColor_PLAY.h"
 
 
-ActionModeFillColor::ActionModeFillColor(ApplicationManager* appMgr) {
+ActionModeFillColor::ActionModeFillColor(ApplicationManager* appMgr):Action(appMgr) {
 	this->pManager = appMgr;
 }
 
