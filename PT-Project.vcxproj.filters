@@ -166,6 +166,8 @@
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionToPlayToDrawToggle.cpp" />
     <ClCompile Include="Actions\ActionLoadGame.cpp" />
+    <ClCompile Include="Actions\ActionModeFigType_PLAY.cpp" />
+    <ClCompile Include="Actions\ActionModeFillColor_PLAY.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -276,6 +278,8 @@
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionToPlayToDrawToggle.h" />
     <ClInclude Include="Actions\ActionLoadGame.h" />
+    <ClInclude Include="Actions\ActionModeFigType_PLAY.h" />
+    <ClInclude Include="Actions\ActionModeFillColor_PLAY.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewFile.txt" />
