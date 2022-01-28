@@ -7,22 +7,30 @@
 
 class ThreadNotifier;
 
+//::NEW AGENDA FRIDAY::
+/*
+	Planning the game : 
+	1- what i need ?  i need when i click on the switch button a new menu get generate ! 
+	2- load the gameFile.text to the drawing area with new functionalty 
+	3- allow the child or the user to pick mode before touch the board 
+	4- after picking the mod that he will follow allow him to pick the first shape [CFigure] from all the figs on the screen 
+	5- make this fig gisappear then allow him to pick another figs according to the mode that he already has picked ! 
+	6- if he picked well we will add the correct to a counter or something else we will add falsy picks to another counter 
+	7- after trying [don't know yet if it will be infinte or number of tries ?] 
+	8- display all those result to him using panal or the screen or whatever 
+	9- ask the user to replay or back to the draw mode 
+	10- if the user picked to back to the drawing mode i should clear the whole screen and back to the draw normally 
+	11- if he picked to replay again the game we will have to clear the screen and let him back again to the start point 
 
-//agenda will be here 
-//we need to manage on select show panal 
-//we need to inject our ui into application manager
-//we need to assign the application manager on select show the menu 
-//we need to let the application manager create a new thread fro this async 
-//then we need to  create a bridge channel between the application manager and the control panal
-//we wanna deliver this information to the figures via the application manager
+	::::::[game states]:::::
 
-//[aim] panalManager sent through Evenet Channel to Another 
-//thread carrying ApplicationManager // callback or handler // implement handler interface
+	GAME MODE: ON->START 
+	1- drawing area cleared 
+	2- new drawing tool bar 
+	3- all the menu buttons working fine 
 
 
-//23-1-2021 we need to manage the switch mode to the game ! 
-//plan to switch to the game 
-//code first 
+*/
 
 
 

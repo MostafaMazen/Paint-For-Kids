@@ -284,7 +284,6 @@ void ApplicationManager::UpdateInterface() const
 	/// <summary>
 	///		Update for game mode
 	/// </summary>
-
 	if (UI.InterfaceMode == MODE_DRAW) {
 		pGUI->CreateDrawToolBar();
 		if (GetSelectedFigure() != -1) {
