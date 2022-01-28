@@ -3,15 +3,16 @@
 #include "..\ApplicationManager.h"
 #include<thread>
 #include<future>
+#include <string>
 
 class ApplicationFiguresHelperPanelManager;
 
 //Add Square Action class
 class ActionSelectFig : public Action
 {
-	ApplicationManager* appMngr;
 	CFigure* figure;
 
+	std::string figType;
 	
 public:
 	ActionSelectFig(ApplicationManager*, CFigure*);

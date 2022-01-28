@@ -8,6 +8,10 @@ ActionModeFigType::ActionModeFigType(ApplicationManager* appMngr) :Action(appMng
 
 void ActionModeFigType::Execute() {
 	// execute this 
+
+	/*
+		
+	*/
 }
 
 

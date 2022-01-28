@@ -11,7 +11,7 @@ void ActionToPlayDrawToggle::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	//make this button toggling
-	//THIS SUPPOSE TO WORK ONLY AS TOGGLING 
+	//THIS SUPPOSE TO WORK ONLY AS TOGGLING
 	if (UI.InterfaceMode == MODE_DRAW) {
 		UI.InterfaceMode = MODE_PLAY;
 		Action* act = new ActionLoadGame(appMngr);

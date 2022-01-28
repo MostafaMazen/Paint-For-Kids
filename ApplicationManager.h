@@ -34,13 +34,10 @@ private:
 	//Pointers to Input and Output classes
 	GUI* pGUI;
 	bool isPlaying; // isPlaying , all game mode icons no more listen 
-	bool gameModeSelected; // start playing the game 
 	
-	
-
-	
-
 public:
+
+	int gameMode; // start playing the game 
 
 	//for (MULTI SELECT)
 	int ctrlState;      // ctrl button state used in select action
@@ -74,6 +71,7 @@ public:
 	int getFigCount();				// get current figures count
 	CFigure** getFigList();			// get all figures
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
+	void deleteFigure(CFigure* pFig);	// delete specific figure
 	void DeleteSelectedFigures(); // Delets all selected figures
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetSelectedFigure() const; //Search for a figure given a point inside the figure

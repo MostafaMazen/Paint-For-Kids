@@ -74,6 +74,8 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 {
 	this->threadNoti = threadNoti;
 
+	gameMode = -1;
+
 	//threadNoti->on("PANEL_START", this);
 
 	cout << "From AppMngr: " << threadNoti << std::endl;
@@ -184,7 +186,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FIG_TYPE_SELECTED" << std::endl;
-				//create the action here 				
+				gameMode = GAME_MODE_FIGTYPE;
 				isPlaying = true;
 			}
 			break;
@@ -192,7 +194,7 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			/* Add action for this mode */
 			if (!isPlaying) {
 				std::cout << "GAME_MODE_FILL_COLOR_SELECTED" << std::endl;
-				//create the action here 
+				gameMode = GAME_MODE_FILLCOLOR;
 				isPlaying = true;
 			}
 			break;
@@ -247,6 +249,27 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
 		FigList[FigCount++] = pFig;	
+}
+
+void ApplicationManager::deleteFigure(CFigure* pFig)
+{
+
+	int index = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i] == pFig) {
+			delete pFig;
+			index = i;
+			break;
+		}
+	}
+
+	for (int i = index; i < FigCount; i++) {
+		FigList[i] = FigList[i + 1];
+		if (i + 1 == FigCount) {
+			FigList[i] = NULL;
+			FigCount--;
+		}
+	}
 }
 
 void ApplicationManager::DeleteSelectedFigures()

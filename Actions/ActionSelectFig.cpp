@@ -5,26 +5,44 @@
 
 ActionSelectFig::ActionSelectFig(ApplicationManager* pApp, CFigure* fig):Action(pApp)
 {
-	appMngr = pApp;
-	figure = fig;
-	
+	figure = fig;	
+	figType = "";
 }
 
 
 void ActionSelectFig::Execute()
 {
-	CFigure** figList = appMngr->getFigList();
-	for (int i = appMngr->getFigCount()-1; i >= 0; i--) {
+	CFigure** figList = pManager->getFigList();
+	for (int i = pManager->getFigCount()-1; i >= 0; i--) {
 		if (figList[i] == figure) {
-			figList[i]->SetSelected(!figList[i]->IsSelected());
-			if (figList[i]->IsSelected()) {
-				appMngr->GetGUI()->PrintMessage(figList[i]->getFigData());
+			if (UI.InterfaceMode == MODE_DRAW) {
+				figList[i]->SetSelected(!figList[i]->IsSelected());
+				if (figList[i]->IsSelected()) {
+					pManager->GetGUI()->PrintMessage(figList[i]->getFigData());
+				}
+			}
+			else {
+				/* Check play mode */
+				if (pManager->gameMode == -1) {
+					MessageBox(pManager->GetGUI()->pWind->getWindow(), "Please select Game mode first", "Alert", MB_OKCANCEL);
+				}else if (pManager->gameMode == GAME_MODE_FIGTYPE) {
+					if (figType == "") {
+						figType = figList[i]->getShapeType();
+
+					}
+					pManager->deleteFigure(figList[i]);
+				}
+				else if(pManager->gameMode == GAME_MODE_FILLCOLOR) {
+
+				}
 			}
 		}
 		else {
-			if (appMngr->ctrlState == 0) {
+			if (pManager->ctrlState == 0) {
 				figList[i]->SetSelected(false);
 			}
 		}
 	}
 }
+
+
