@@ -24,6 +24,7 @@ public:
 	virtual void Save(ofstream& OutFile);	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile);	//Load the figure parameters to the file
 	virtual std::string getShapeType();
+	virtual std::string getColor();
 
 };
 

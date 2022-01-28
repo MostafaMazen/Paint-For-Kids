@@ -38,6 +38,7 @@ public:
 	virtual void Load(ifstream& Infile) = 0;	//Load the figure parameters to the file
 	////////////////////////////////////////////////////////////////////////////////////
 	virtual std::string getShapeType() = 0;
+	virtual std::string getColor() = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

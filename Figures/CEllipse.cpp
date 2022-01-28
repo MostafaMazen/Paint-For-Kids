@@ -168,3 +168,8 @@ std::string CEllipse::getShapeType()
 {
 	return "ELLIPSE";
 }
+
+std::string CEllipse::getColor()
+{
+	return this->FigGfxInfo.FillClr.toHexa();
+}

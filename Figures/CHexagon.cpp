@@ -184,3 +184,8 @@ std::string CHexagon::getShapeType()
 {
 	return "HEXAGON";
 }
+
+std::string CHexagon::getColor()
+{
+	return this->FigGfxInfo.FillClr.toHexa();
+}

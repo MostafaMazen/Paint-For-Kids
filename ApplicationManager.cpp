@@ -80,7 +80,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	gameStates.figType = "";
 	gameStates.correctAns = 0;
 	gameStates.wrongAns = 0;
-	gameStates.figColor = color(0, 0, 0);
+	gameStates.figColor = "";
 
 	//threadNoti->on("PANEL_START", this);
 
@@ -236,6 +236,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		pAct = NULL;
 	}
 }
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -245,15 +246,34 @@ int ApplicationManager::getFigCount()
 	return FigCount;
 }
 
-void ApplicationManager::gameMachineValidCount(std::string figType)
+void ApplicationManager::gameMachineValidCount(int PLAY_MODE)
 {
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->getShapeType() == figType) {
-			gameStates.validShapesCount++;
+	switch (PLAY_MODE)
+	{
+	case GAME_MODE_FIGTYPE:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->getShapeType() == gameStates.figType) {
+				gameStates.validShapesCount++;
+			}
+			else {
+				gameStates.inValidShapesCount++;
+			}
 		}
-		else {
-			gameStates.inValidShapesCount++;
+		break;
+	case GAME_MODE_FILLCOLOR:
+		//TODO error prone area
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->getColor() == gameStates.figColor) {
+				gameStates.validShapesCount++;
+			}
+			else {
+				gameStates.inValidShapesCount++;
+			}
 		}
+		break;
+	default:
+		std::cout << "unknown Error happen ! <<<< "<<std::endl;
+		break;
 	}
 }
 

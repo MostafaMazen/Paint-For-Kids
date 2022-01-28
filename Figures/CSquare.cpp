@@ -139,4 +139,9 @@ std::string CSquare::getShapeType()
 	return "SQUARE";
 }
 
+std::string CSquare::getColor()
+{
+	return this->FigGfxInfo.FillClr.toHexa();
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
