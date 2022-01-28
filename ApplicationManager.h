@@ -33,6 +33,7 @@ private:
 	ApplicationManagerState* appManagerState;
 	//Pointers to Input and Output classes
 	GUI* pGUI;
+	
 
 	
 

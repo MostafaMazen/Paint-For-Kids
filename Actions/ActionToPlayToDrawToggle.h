@@ -5,9 +5,9 @@
 
 #include "..\GUI\GUI.h"
 
-class ActionToPlay :public Action
+class ActionToPlayDrawToggle :public Action
 {
 public:
-	ActionToPlay(ApplicationManager* pApp);
+	ActionToPlayDrawToggle(ApplicationManager* pApp);
 	virtual void Execute();
 };

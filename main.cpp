@@ -25,10 +25,15 @@ class ThreadNotifier;
 	::::::[game states]:::::
 
 	GAME MODE: ON->START 
-	1- drawing area cleared 
+	1- drawing area cleared  maybe if we used load it will clear the screen and load up the new files ! ?  yeah ia m sure 
 	2- new drawing tool bar 
 	3- all the menu buttons working fine 
 
+
+	::URGENT FIXING THE POINTERS 
+
+	::tool bar :  [fixed] 
+	
 
 */
 

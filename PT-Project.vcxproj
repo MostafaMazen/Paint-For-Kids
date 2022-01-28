@@ -137,7 +137,7 @@
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelectFig.cpp" />
-    <ClCompile Include="Actions\ActionToPlay.cpp" />
+    <ClCompile Include="Actions\ActionToPlayToDrawToggle.cpp" />
     <ClCompile Include="Actions\Resize.cpp" />
     <ClCompile Include="ApplicationFiguresHelperPanel\ApplicationFiguresHelperPanel.cpp" />
     <ClCompile Include="ApplicationObjectHelperTool\ApplicationObjectHelperTool.cpp" />
@@ -200,7 +200,7 @@
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelectFig.h" />
-    <ClInclude Include="Actions\ActionToPlay.h" />
+    <ClInclude Include="Actions\ActionToPlayToDrawToggle.h" />
     <ClInclude Include="Actions\Resize.h" />
     <ClInclude Include="ApllicationManagerState\Header1.h" />
     <ClInclude Include="ApplicationFiguresHelperPanel\ApplicationFiguresHelperPanel.h" />

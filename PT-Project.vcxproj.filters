@@ -164,7 +164,7 @@
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
-    <ClCompile Include="Actions\ActionToPlay.cpp" />
+    <ClCompile Include="Actions\ActionToPlayToDrawToggle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -273,7 +273,7 @@
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
-    <ClInclude Include="Actions\ActionToPlay.h" />
+    <ClInclude Include="Actions\ActionToPlayToDrawToggle.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewFile.txt" />

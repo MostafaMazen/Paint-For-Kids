@@ -3,7 +3,7 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionSelectFig.h"
 #include "Actions\ActionAddHexagon.h"
-#include "Actions\ActionToPlay.h"
+#include "Actions\ActionToPlayToDrawToggle.h"
 #include "Actions\Resize.h"
 #include <iostream>
 #include "MouseState\MouseStatesUtil.h"
@@ -93,6 +93,10 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	this->threadNoti->on("PANEL_CLOSE", this);
 	this->threadNoti->on("PANEL_CHANGE_COLOR", this);
 
+	//initializing intial appMode state 
+	UI.InterfaceMode = MODE_DRAW; // INTIAL STATE 
+
+
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
@@ -172,8 +176,8 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			newAct = new ActionLoad(this);
 			break;
 
-		case TO_PLAY:
-			newAct = new ActionToPlay(this);
+		case TO_PLAY_DRAW_TOGGLE:
+			newAct = new ActionToPlayDrawToggle(this);
 			break;
 
 		case EXIT:
@@ -284,7 +288,10 @@ void ApplicationManager::UpdateInterface() const
 	/// <summary>
 	///		Update for game mode
 	/// </summary>
-	if (UI.InterfaceMode == MODE_DRAW) {
+	/// UI can feel the action changes 	
+	std::cout << UI.InterfaceMode << std::endl;
+	switch (UI.InterfaceMode) {
+	case MODE_DRAW:
 		pGUI->CreateDrawToolBar();
 		if (GetSelectedFigure() != -1) {
 			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
@@ -292,12 +299,28 @@ void ApplicationManager::UpdateInterface() const
 		pGUI->ClearDrawArea();
 		for (int i = 0; i < FigCount; i++)
 			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		pGUI->CreateStatusBar();
+		break;
+	case MODE_PLAY:
+		std::cout << "handle the on MODE_PLAY screen update !" << std::endl;
+		/*
+			HERE WE WILL UPDATE THE DRAWING AREA AND STATUS BAR AND THE TOOLBAR 
+			ACCORDING TO THE USER CLICKS 
+		*/
+		pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
+		pGUI->CreateDrawToolBar();
+		if (GetSelectedFigure() != -1) {
+			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
+		}
+		pGUI->ClearDrawArea();
+		for (int i = 0; i < FigCount; i++)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		pGUI->CreateStatusBar();
+		break;
+	default:
+		break;
 	}
-	else {
-		pGUI->ClearDrawingToolBar();
-		pGUI->CreatePlayToolBar();
-	}
-	pGUI->CreateStatusBar();
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

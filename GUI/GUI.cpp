@@ -103,9 +103,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_RESIZE: return RESIZE;
 			case ITM_LOAD:return LOAD;
 			case ITM_SAVE:return SAVE;
-			case ITM_SWITCH2PLAY:return TO_PLAY;
+			case ITM_SWITCH2PLAY:return TO_PLAY_DRAW_TOGGLE;
 			case ITM_EXIT: return EXIT;
-			case ITM_EXIT2: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -120,6 +119,36 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
+	else if (UI.InterfaceMode == MODE_PLAY) {
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_SWITCH2DRAW: return TO_PLAY_DRAW_TOGGLE;
+			case ITM_EXIT2: return EXIT;
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS;
+	}
+
+	/*
 	else	//GUI is in PLAY mode
 	{
 		///TODO:
@@ -127,6 +156,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 		//and return the correspoding action
 		return TO_PLAY;	//just for now. This should be updated
 	}
+	*/
+	
 }
 //======================================================================================//
 //								Output Functions										//
@@ -173,7 +204,49 @@ void GUI::ClearStatusBar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateDrawToolBar() const
 {
-	UI.InterfaceMode = MODE_DRAW;
+	//UI.InterfaceMode = MODE_DRAW; not my job
+
+	if (UI.InterfaceMode == MODE_DRAW) {	 
+		string MenuItemImages[DRAW_ITM_COUNT];
+		MenuItemImages[ITM_SQUR] = "images\\MenuItems\\square.jpg";
+		MenuItemImages[ITM_ELPS] = "images\\MenuItems\\ellipse.jpg";
+		MenuItemImages[ITM_HXGN] = "images\\MenuItems\\hexagon.jpg";
+		MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
+		MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+		MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+		MenuItemImages[ITM_SWITCH2PLAY] = "images\\MenuItems\\switch.jpg";
+		MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
+
+		//TODO: Prepare images for each menu item and add it to the list
+
+		//Draw menu item one image at a time
+		for (int i = 0; i < DRAW_ITM_COUNT; i++)
+			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+		//Draw a line under the toolbar
+		pWind->SetPen(BLACK, 3);
+		pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);		
+
+	}
+	else if (UI.InterfaceMode == MODE_PLAY) {
+		string MenuItemImages[PLAY_ITM_COUNT];
+		MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
+		MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
+		MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch.jpg";
+		MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
+		//TODO: Prepare images for each menu item and add it to the list
+
+		//Draw menu item one image at a time
+		for (int i = 0; i < PLAY_ITM_COUNT; i++)
+			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+		//Draw a line under the toolbar
+		pWind->SetPen(BLACK, 3);
+		pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+	}
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
@@ -181,34 +254,15 @@ void GUI::CreateDrawToolBar() const
 	//First prepare List of images for each menu item
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
-	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\square.jpg";
-	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\ellipse.jpg";
-	MenuItemImages[ITM_HXGN] = "images\\MenuItems\\hexagon.jpg";
-	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
-	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
-	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
-	MenuItemImages[ITM_SWITCH2PLAY] = "images\\MenuItems\\switch.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
-
-	//TODO: Prepare images for each menu item and add it to the list
-
-	//Draw menu item one image at a time
-	for(int i=0; i<DRAW_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
-
-
-
-	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
-
+	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//THE WORST FUNCTION EVER WE'VE CREATED 
+/*
 void GUI::CreatePlayToolBar() const
 {
-	UI.InterfaceMode = MODE_PLAY;
+	UI.InterfaceMode = MODE_PLAY; // THIS IS NOT MY JOB
 	///TODO: write code to create Play mode menu
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
@@ -225,6 +279,11 @@ void GUI::CreatePlayToolBar() const
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 1);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+*/
+void GUI::CreatePlayToolBar() const
+{
+	//DEPRECATED DON'T USE IT PLEAS [JIMMY]
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
