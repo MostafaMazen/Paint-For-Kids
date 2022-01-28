@@ -10,7 +10,7 @@
 
 ActionLoadGame::ActionLoadGame(ApplicationManager* pApp) :Action(pApp)
 {
-	GameFileName = "fillColorTest.txt";
+	GameFileName = "GameFile.txt";
 	//GameFileName = "f1.txt";
 }
 
