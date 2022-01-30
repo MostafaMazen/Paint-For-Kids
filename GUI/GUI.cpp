@@ -34,14 +34,6 @@ GUI::GUI()
 
 	mStP.msg = "";
 
-	/*mouseDown = new OnDown(appMngState);
-	mouseMove = new OnMove(appMngState, appManger);
-	mouseUp = new OnUp(appMngState);*/
-	/*mouseState->on("MOUSE_DOWN", mouseDown);
-	mouseState->on("MOUSE_MOVE", mouseMove);
-	mouseState->on("MOUSE_UP", mouseUp);*/
-
-
 
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");

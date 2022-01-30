@@ -114,7 +114,7 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		  switch (wParam) {
 		  case VK_CONTROL:
 			  if (mouseState != NULL) {
-				  //std::cout << "CTRL Key UP" << endl;
+				  std::cout << "CTRL Key UP" << endl;
 				  ctrlState = 0;
 				  mouseInfo.ctrlKey = 0;
 				  mouseState->emit("CTRL_KEY", mouseInfo);
@@ -138,7 +138,7 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 					  return 0;
 				  }
 				  if (mouseInfo.ctrlKey == 0) {
-					  //std::cout << "CTRL Key Pressed" << endl;
+					  std::cout << "CTRL Key Pressed" << endl;
 					  mouseInfo.ctrlKey = 1;
 					  mouseState->emit("CTRL_KEY", mouseInfo);
 				  }

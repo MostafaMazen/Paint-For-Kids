@@ -64,7 +64,6 @@ enum angletype {
 	RADIANS
 };
 
-
 class window {
 
   private:

@@ -15,14 +15,16 @@
 
 void ApplicationManager::onEvent(MouseStPoint& data)
 {
-
+	cout << "__________" << data.ctrlKey << endl;
 	ctrlState = data.ctrlKey;   // get ctrl button state
 
 	/* Fixing Screen Error */
 	if (data.state == STATE_SIZING || data.state == STATE_PAINTING) {
-		std::async(std::launch::async, &ApplicationManager::UpdateInterface,this);
-	}
 
+		std::async(std::launch::async, &ApplicationManager::UpdateInterface,this);
+		std::async(std::launch::async, &GUI::CreateStatusBar, pGUI);
+	}
+	cout << "__________" << data.ctrlKey << endl;
 	/**/
 	if (data.msg != "") {
 		msg = data.msg;
@@ -95,9 +97,10 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	mouseState->on("MOUSE_MOVE", this);
 	mouseState->on("MOUSE_UP", this);
 	mouseState->on("DELETE_KEY", this);
+	mouseState->on("CTRL_KEY", this);
 	mouseState->on("WIN_SIZING", this);
 	mouseState->on("WIN_PAINTING", this);
-	mouseState->on("MSG_CHANGE", this);
+	//mouseState->on("MSG_CHANGE", this);
 
 	this->threadNoti->on("PANEL_START", this);
 	this->threadNoti->on("PANEL_CLOSE", this);
@@ -402,9 +405,9 @@ void ApplicationManager::UpdateInterface() const
 	pGUI->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-	pGUI->CreateStatusBar();
-
-	pGUI->PrintMessage(msg);
+	
+	//pGUI->CreateStatusBar();
+	//pGUI->PrintMessage(msg);
 
 }
 

@@ -15,11 +15,7 @@ class GUI
 {
 
 private:
-	ApplicationManagerState* appMngState;
 	MouseStateNotifier* mouseState;
-	MouseEventHandler* mouseDown;
-	MouseEventHandler* mouseMove;
-	MouseEventHandler* mouseUp;
 
 	MouseStPoint mStP;
 	
