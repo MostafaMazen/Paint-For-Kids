@@ -11,11 +11,10 @@ class ApplicationFiguresHelperPanelManager;
 class ActionSelectFig : public Action
 {
 	CFigure* figure;
-	
+
+	void manageGame(int gameMode, CFigure* figure);
 public:
 	ActionSelectFig(ApplicationManager*, CFigure*);
-
-	
 
 	//Add Square to the ApplicationManager
 	virtual void Execute();
