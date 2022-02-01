@@ -41,6 +41,14 @@ void ActionSelectFig::Execute()
 	}
 }
 
+void ActionSelectFig::Undo()
+{
+}
+
+void ActionSelectFig::Redo()
+{
+}
+
 
 void ActionSelectFig::manageGame(int gameMode, CFigure* figure)
 {

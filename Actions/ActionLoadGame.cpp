@@ -82,3 +82,11 @@ void ActionLoadGame::Execute() {
 	pGUI->PrintMessage("file Loaded ");
 
 }
+
+void ActionLoadGame::Undo()
+{
+}
+
+void ActionLoadGame::Redo()
+{
+}

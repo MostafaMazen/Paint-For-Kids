@@ -42,3 +42,11 @@ void ActionAddEllipse::Execute()
 	CEllipse* R = new CEllipse(P1,P2,StartAngle,EndAngle, EllGfxInfo);
 	pManager->AddFigure(R);
 }
+
+void ActionAddEllipse::Undo()
+{
+}
+
+void ActionAddEllipse::Redo()
+{
+}

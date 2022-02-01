@@ -10,4 +10,12 @@ void ActionModeFillColor::Execute() {
 	//execute the code here
 }
 
+void ActionModeFillColor::Undo()
+{
+}
+
+void ActionModeFillColor::Redo()
+{
+}
+
 

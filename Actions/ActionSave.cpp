@@ -50,3 +50,11 @@ void ActionSave::Execute() {
 
 
 }
+
+void ActionSave::Undo()
+{
+}
+
+void ActionSave::Redo()
+{
+}

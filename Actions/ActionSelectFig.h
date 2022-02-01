@@ -19,4 +19,8 @@ public:
 	//Add Square to the ApplicationManager
 	virtual void Execute();
 
+	virtual void Undo();
+
+	virtual void Redo();
+
 };

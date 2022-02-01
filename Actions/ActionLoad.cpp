@@ -84,3 +84,11 @@ void ActionLoad::Execute() {
 	pGUI->PrintMessage("file Loaded ");
 
 }
+
+void ActionLoad::Undo()
+{
+}
+
+void ActionLoad::Redo()
+{
+}

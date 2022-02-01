@@ -5,7 +5,6 @@ Resize::Resize(ApplicationManager* pAppMgr, CFigure* selected) :Action(pAppMgr),
 	FigureSelected = selected;
 }
 
-void Resize::ReadActionParameters() {}
 
 void Resize::Execute()
 {
@@ -35,4 +34,12 @@ void Resize::Execute()
     }
 
 	FigureSelected->setSize(factor);
+}
+
+void Resize::Undo()
+{
+}
+
+void Resize::Redo()
+{
 }

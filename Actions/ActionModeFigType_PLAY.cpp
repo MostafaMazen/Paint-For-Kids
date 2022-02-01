@@ -14,5 +14,13 @@ void ActionModeFigType::Execute() {
 	*/
 }
 
+void ActionModeFigType::Undo()
+{
+}
+
+void ActionModeFigType::Redo()
+{
+}
+
 
 

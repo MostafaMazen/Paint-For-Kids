@@ -50,3 +50,11 @@ void ActionAddHexagon::Execute()
 
 	pManager->AddFigure(R);
 }
+
+void ActionAddHexagon::Undo()
+{
+}
+
+void ActionAddHexagon::Redo()
+{
+}

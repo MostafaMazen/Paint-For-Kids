@@ -12,6 +12,10 @@ public:
 	//Add Ellipse to the ApplicationManager
 	virtual void Execute();
 
+	virtual void Undo();
+
+	virtual void Redo();
+
 };
 
 #endif

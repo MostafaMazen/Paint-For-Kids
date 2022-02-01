@@ -24,3 +24,11 @@ void ActionToPlayDrawToggle::Execute()
 		appMngr->RemoveAllFigs();
 	}
 }
+
+void ActionToPlayDrawToggle::Undo()
+{
+}
+
+void ActionToPlayDrawToggle::Redo()
+{
+}

@@ -10,4 +10,8 @@ private:
 public:
 	ActionLoadGame(ApplicationManager* pApp);
 	virtual void Execute();
+
+	virtual void Undo();
+
+	virtual void Redo();
 };

@@ -9,6 +9,7 @@
 #include "ApplicationServices\ThreadNotifier.h"
 #include<future>
 #include<thread>
+#include<vector>
 
 class Action;	//Forward Declaration
 
@@ -30,6 +31,7 @@ private:
 	ActionType ActType;
 	int FigCount, x, y;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
+	std::vector<Action*>history; //the history of the actions 
 	MouseStateNotifier* mouseState;
 	ApplicationManagerState* appManagerState;
 	//Pointers to Input and Output classes

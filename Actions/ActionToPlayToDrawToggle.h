@@ -12,4 +12,8 @@ class ActionToPlayDrawToggle :public Action
 	public:
 		ActionToPlayDrawToggle(ApplicationManager* pApp);
 		virtual void Execute();
+
+		virtual void Undo();
+
+		virtual void Redo();
 };

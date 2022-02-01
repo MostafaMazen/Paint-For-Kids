@@ -12,4 +12,8 @@ public:
 	ActionSave(ApplicationManager* pApp, int FigCount);
 	virtual void Execute();
 
+	virtual void Undo();
+
+	virtual void Redo();
+
 };

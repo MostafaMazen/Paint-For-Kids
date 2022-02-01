@@ -8,7 +8,9 @@ class Resize : public Action
 public:
 	Resize(ApplicationManager* pAppMgr, CFigure*);
 
-
-	virtual void ReadActionParameters();
 	virtual void Execute();
+
+	virtual void Undo();
+
+	virtual void Redo();
 };
