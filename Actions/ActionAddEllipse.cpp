@@ -22,6 +22,9 @@ void ActionAddEllipse::Execute()
 	//get drawing, filling colors and pen width from the interface
 	EllGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	EllGfxInfo.FillClr = pGUI->getCrntFillColor();
+	if (EllGfxInfo.FillClr.toHexa() != "#000000") {
+		EllGfxInfo.isFilled = true;
+	}
 	EllGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
 

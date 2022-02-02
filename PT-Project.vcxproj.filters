@@ -168,6 +168,8 @@
     <ClCompile Include="Actions\ActionLoadGame.cpp" />
     <ClCompile Include="Actions\ActionModeFigType_PLAY.cpp" />
     <ClCompile Include="Actions\ActionModeFillColor_PLAY.cpp" />
+    <ClCompile Include="Actions\ActionSendToBack.cpp" />
+    <ClCompile Include="Actions\ActionBringToFront.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -280,6 +282,8 @@
     <ClInclude Include="Actions\ActionLoadGame.h" />
     <ClInclude Include="Actions\ActionModeFigType_PLAY.h" />
     <ClInclude Include="Actions\ActionModeFillColor_PLAY.h" />
+    <ClInclude Include="Actions\ActionSendToBack.h" />
+    <ClInclude Include="Actions\ActionBringToFront.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewFile.txt" />
@@ -297,5 +301,11 @@
     <Image Include="images\MenuItems\save.jpg" />
     <Image Include="images\MenuItems\open.jpg" />
     <Image Include="images\MenuItems\collage.jpg" />
+    <Image Include="images\MenuItems\b2f.jpg" />
+    <Image Include="images\MenuItems\s2b.jpg" />
+    <Image Include="images\MenuItems\shapes&amp;colors.jpg" />
+    <Image Include="images\MenuItems\opened_folder_60px.jpg" />
+    <Image Include="images\MenuItems\close_window_50px.jpg" />
+    <Image Include="images\MenuItems\free-exit.jpg" />
   </ItemGroup>
 </Project>

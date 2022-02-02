@@ -126,9 +126,10 @@ int ApplicationObjectHelperTool::init(ThreadNotifier* threadNoti) {
             
             //std::cout << "red : " << std::to_string((int)(CrossHairColor[0] * 255)) << "green : " << std::to_string((int)CrossHairColor[1] * 255) << " blue" << std::to_string(int(CrossHairColor[2] * 255)) << std::endl;
             ImGui::Text("Figure Top and back layer");
-            static const char* items[]{"send shape to front","send shape to back"};
+            static const char* items[]{"Background Color","Drawing Color","Filling Color" ,"Figure Color" };
             static int selectedItem = 0;
             ImGui::ListBox("State",&selectedItem,items,IM_ARRAYSIZE(items));
+            //std::cout << "selected :  " << selectedItem<<std::endl;
             ImGui::Checkbox("DarkMode",&colorMode);
             if (colorMode == true) {
                 ImGui::StyleColorsDark();
@@ -140,6 +141,7 @@ int ApplicationObjectHelperTool::init(ThreadNotifier* threadNoti) {
                 PanelListener pl;
                 pl.appPanelMngr = nullptr;
                 pl.stat = PANAL_SENDING_COLOR;
+                pl.target = selectedItem;
                 pl.selectedObjColor = color(CrossHairColor[0] * 255, CrossHairColor[1] * 255, CrossHairColor[2] * 255);
                 threadNoti->emit("PANEL_CHANGE_COLOR", &pl);
                 redBuffer = CrossHairColor[0];

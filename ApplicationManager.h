@@ -52,6 +52,7 @@ public:
 
 	//for (MULTI SELECT)
 	int ctrlState;      // ctrl button state used in select action
+	int f1State;      // f1 button state
 
 	//saving and loading functionality /////////////////////////////////////////
 	std::string openFile(HWND hwnd);
@@ -93,5 +94,9 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 
 	void resetGame();
+
+	//sendBack & bringToFront
+	void SendFigureBack(CFigure*);
+	void BringFigureFront(CFigure*);
 
 };

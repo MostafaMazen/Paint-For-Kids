@@ -55,3 +55,11 @@ enum ResizeFactor
 	TWOTIMES,
 	FOURTIMES,
 };
+
+enum TARGET_FOR_COLOR
+{ 
+	BACKGROUND, 
+	DRAWING, 
+	FILLING, 
+	FIGURE 
+};

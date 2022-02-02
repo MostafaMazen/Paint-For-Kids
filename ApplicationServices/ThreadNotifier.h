@@ -22,6 +22,7 @@ enum PANEL_STATE { PANEL_OPEN, PANEL_CLOSE, PANAL_SENDING_COLOR, PANAL_SENDING_O
 struct PanelListener {
 	ApplicationFiguresHelperPanelManager* appPanelMngr;
 	PANEL_STATE stat;
+	int target;
 	color selectedObjColor;
 	int shapeOverLapState; // 0 or 1 
 	bool threadClose;

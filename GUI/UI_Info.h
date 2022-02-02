@@ -23,6 +23,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 	//TODO: Add more items names here
 	ITM_RESIZE,		//Resize Selected Figure
+	ITM_SEND2BACK,
+	ITM_BRING2FRONT,
 	ITM_LOAD,
 	ITM_SAVE,
 	ITM_SWITCH2PLAY,

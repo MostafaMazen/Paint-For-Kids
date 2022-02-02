@@ -18,6 +18,7 @@ This file was last modified on 05.16.1999
 // appropriate window object
 windowinput* wipInput = NULL;
 int ctrlState = 1;
+int f1State = 1;
 MouseStateNotifier* mouseState = nullptr;
 MouseStPoint mouseInfo;
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -120,6 +121,14 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 				  mouseState->emit("CTRL_KEY", mouseInfo);
 			  }
 			  break;
+		  case VK_F1:
+			  if (mouseState != NULL) {
+				  std::cout << "F1 Key UP" << endl;
+				  f1State = 0;
+				  mouseInfo.f1Key = 0;
+				  mouseState->emit("F1_KEY", mouseInfo);
+			  }
+			  break;
 		  }
 		  break;
 	  case WM_KEYDOWN:
@@ -202,6 +211,17 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		  case VK_F1:
             if(wipInput != NULL) {
                 wipInput->SetKeyInfo(hwnd, FUNCTION, 1);
+				if (mouseState != NULL) {
+					if (f1State == 0) {
+						f1State = 1;
+						//return 0;
+					}
+					if (f1State == 1) {
+						std::cout << "F1 Key Pressed" << endl;
+						mouseInfo.f1Key = 1;
+						mouseState->emit("F1_KEY", mouseInfo);
+					}
+				}
 			}
 			break;
 

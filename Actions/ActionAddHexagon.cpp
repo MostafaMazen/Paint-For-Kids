@@ -30,6 +30,9 @@ void ActionAddHexagon::Execute()
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
+	if (SqrGfxInfo.FillClr.toHexa() != "#000000") {
+		SqrGfxInfo.isFilled = true;
+	}
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 	//center
 	pGUI->PrintMessage("New Hexagon: Center point");

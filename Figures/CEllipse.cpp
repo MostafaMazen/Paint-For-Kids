@@ -46,6 +46,9 @@ void CEllipse::setCenterPoint(int x, int y)
 	firstPoint.y = y - yLength/2;
 	secondPoint.x = x + xLength/2;
 	secondPoint.y = y + yLength/2;
+
+	sFP = firstPoint;
+	sSP = secondPoint;
 }
 
 void CEllipse::setSize(float factor)

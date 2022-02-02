@@ -19,7 +19,7 @@ GUI::GUI()
 	UI.MenuItemWidth = 80;
 	
 	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
+	UI.FillColor = NULL;	//Filling color
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -95,6 +95,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HXGN: return DRAW_HEX;
 			case ITM_RESIZE: return RESIZE;
+			case ITM_SEND2BACK: return SEND_BACK;
+			case ITM_BRING2FRONT: return BRNG_FRNT;
 			case ITM_LOAD:return LOAD;
 			case ITM_SAVE:return SAVE;
 			case ITM_SWITCH2PLAY:return TO_PLAY_DRAW_TOGGLE;
@@ -209,6 +211,8 @@ void GUI::CreateDrawToolBar() const
 		MenuItemImages[ITM_ELPS] = "images\\MenuItems\\ellipse.jpg";
 		MenuItemImages[ITM_HXGN] = "images\\MenuItems\\hexagon.jpg";
 		MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
+		MenuItemImages[ITM_SEND2BACK] = "images\\MenuItems\\s2b.jpg";
+		MenuItemImages[ITM_BRING2FRONT] = "images\\MenuItems\\b2f.jpg";
 		MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 		MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 		MenuItemImages[ITM_SWITCH2PLAY] = "images\\MenuItems\\switch.jpg";
@@ -230,7 +234,7 @@ void GUI::CreateDrawToolBar() const
 		string MenuItemImages[PLAY_ITM_COUNT];
 		MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
 		MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
-		MenuItemImages[ITM_PICK_FILL_TYPE] = "images\\MenuItems\\collage.jpg";
+		MenuItemImages[ITM_PICK_FILL_TYPE] = "images\\MenuItems\\shapes&colors.jpg";
 		MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch.jpg";
 		MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
 		//TODO: Prepare images for each menu item and add it to the list

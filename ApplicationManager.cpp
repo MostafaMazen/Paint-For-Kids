@@ -5,6 +5,8 @@
 #include "Actions\ActionAddHexagon.h"
 #include "Actions\ActionToPlayToDrawToggle.h"
 #include "Actions\Resize.h"
+#include "Actions/ActionSendToBack.h"
+#include "Actions/ActionBringToFront.h"
 #include <iostream>
 #include "MouseState\MouseStatesUtil.h"
 #include "DEFS.h"
@@ -15,8 +17,8 @@
 
 void ApplicationManager::onEvent(MouseStPoint& data)
 {
-	cout << "__________" << data.ctrlKey << endl;
 	ctrlState = data.ctrlKey;   // get ctrl button state
+	f1State = data.f1Key;   // get f1 button state
 
 	/* Fixing Screen Error */
 	if (data.state == STATE_SIZING || data.state == STATE_PAINTING) {
@@ -24,11 +26,7 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 		std::async(std::launch::async, &ApplicationManager::UpdateInterface,this);
 		std::async(std::launch::async, &GUI::CreateStatusBar, pGUI);
 	}
-	cout << "__________" << data.ctrlKey << endl;
-	/**/
-	if (data.msg != "") {
-		msg = data.msg;
-	}
+
 	// case delete button is pressed
 	if (data.delKey == 1) {
 		// check if there is any selected figure
@@ -43,9 +41,6 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 		cout << "Delete-Key pressed" << endl;
 	}
 
-	//cout << "STATE: " <<data.state<< endl;
-	//cout << "ActionType: " << ActType << endl;
-
 	/* Moving the selected figure */
 	if (GetSelectedFigure() != -1 && data.mouseDown == true) {
 		if (FigList[GetSelectedFigure()]->hasPoint(data.x, data.y)) {
@@ -59,7 +54,7 @@ void ApplicationManager::onEvent(MouseStPoint& data)
 
 void ApplicationManager::onMessageRecieved(PanelListener* panelListen)
 {
-	if (GetSelectedFigure() != -1 && panelListen->stat == PANEL_OPEN) {
+	if ((GetSelectedFigure() != -1 || f1State ==1) && panelListen->stat == PANEL_OPEN) {
 		if (UI.InterfaceMode == MODE_DRAW) {
 			panelListen->appPanelMngr->launchPanal();
 		}
@@ -68,10 +63,30 @@ void ApplicationManager::onMessageRecieved(PanelListener* panelListen)
 		FigList[GetSelectedFigure()]->SetSelected(false);
 		UpdateInterface();
 	}
-	else if (GetSelectedFigure() != -1 && panelListen->stat == PANAL_SENDING_COLOR) {
-		FigList[GetSelectedFigure()]->ChngFillClr(panelListen->selectedObjColor);
-		FigList[GetSelectedFigure()]->ChngDrawClr(panelListen->selectedObjColor);
-		UpdateInterface();
+	else if (panelListen->stat == PANAL_SENDING_COLOR) {
+		
+		switch (panelListen->target) {
+		case BACKGROUND:
+			UI.BkGrndColor = panelListen->selectedObjColor;
+			pGUI->PrintMessage("Background color set to : " + panelListen->selectedObjColor.toHexa());
+			break;
+		case DRAWING:
+			UI.DrawColor = panelListen->selectedObjColor;
+			pGUI->PrintMessage("Drawing color set to : " + panelListen->selectedObjColor.toHexa());
+			break;
+		case FILLING:
+			UI.FillColor = panelListen->selectedObjColor;
+			pGUI->PrintMessage("Filing color set to : " + panelListen->selectedObjColor.toHexa());
+			break;
+		case FIGURE:
+			if (GetSelectedFigure() != -1) {
+				FigList[GetSelectedFigure()]->ChngFillClr(panelListen->selectedObjColor);
+				FigList[GetSelectedFigure()]->ChngDrawClr(panelListen->selectedObjColor);
+			}
+			break;
+		}
+
+		std::async(std::launch::async, &ApplicationManager::UpdateInterface, this);
 	}
 }
 
@@ -98,6 +113,7 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	mouseState->on("MOUSE_UP", this);
 	mouseState->on("DELETE_KEY", this);
 	mouseState->on("CTRL_KEY", this);
+	mouseState->on("F1_KEY", this);
 	mouseState->on("WIN_SIZING", this);
 	mouseState->on("WIN_PAINTING", this);
 	//mouseState->on("MSG_CHANGE", this);
@@ -139,7 +155,7 @@ void ApplicationManager::Run()
 		ExecuteAction(pAct);
 
 		//4- Update the interface
-		UpdateInterface();
+		std::async(std::launch::async, &ApplicationManager::UpdateInterface, this);
 
 	}while(ActType != EXIT);
 	
@@ -179,6 +195,12 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			else {
 				pGUI->PrintMessage("Please select a figure first to resize it!");
 			}
+			break;
+		case SEND_BACK:
+			newAct = new ActionSendToBack(this, FigList[GetSelectedFigure()]);
+			break;
+		case BRNG_FRNT:
+			newAct = new ActionBringToFront(this, FigList[GetSelectedFigure()]);
 			break;
 		case SAVE:
 			newAct = new ActionSave(this, FigCount);
@@ -358,6 +380,36 @@ void ApplicationManager::DeleteSelectedFigures()
 	}
 }
 
+//sendBack & bringToFront
+void ApplicationManager::SendFigureBack(CFigure* selectedFigure)
+{
+	CFigure* temp = selectedFigure;
+	int swappingIndex;
+	for (int i = 0; i < FigCount; i++)
+		if (selectedFigure == FigList[i])
+		{
+			swappingIndex = i;
+			break;
+		}
+
+	for (int i = swappingIndex; i > 0; i--)
+		FigList[i] = FigList[i - 1];
+	FigList[0] = temp;
+}
+
+void ApplicationManager::BringFigureFront(CFigure* selectedFigure)
+{
+	CFigure* temp = selectedFigure;
+	int swappingIndex;
+	for (int i = 0; i < FigCount; i++)
+		if (selectedFigure == FigList[i])
+			swappingIndex = i;
+
+	for (int i = swappingIndex; i < FigCount - 1; i++)
+		FigList[i] = FigList[i + 1];
+	FigList[FigCount - 1] = temp;
+}
+
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
@@ -405,9 +457,6 @@ void ApplicationManager::UpdateInterface() const
 	pGUI->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-	
-	//pGUI->CreateStatusBar();
-	//pGUI->PrintMessage(msg);
 
 }
 
