@@ -27,7 +27,9 @@ void ApplicationFiguresHelperPanelManager::onInit()
         PanelListener* pl = new PanelListener();
         pl->appPanelMngr = this;
         pl->stat = PANEL_OPEN;
-        threadNoti->emit("PANEL_START", pl);
+        std::async(std::launch::async, [this,&pl]() {
+            threadNoti->emit("PANEL_START", pl);
+            });
 }
 
 void ApplicationFiguresHelperPanelManager::onClose() {

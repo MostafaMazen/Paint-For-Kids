@@ -16,7 +16,7 @@ GUI::GUI()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 50;
+	UI.MenuItemWidth = 45;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = NULL;	//Filling color
@@ -212,7 +212,7 @@ void GUI::ClearStatusBar() const
 void GUI::CreateDrawToolBar() const
 {
 	std::async(std::launch::async, [this]() {
-
+		
 		//UI.InterfaceMode = MODE_DRAW; not my job
 
 		pWind->SetPen(WHITE);

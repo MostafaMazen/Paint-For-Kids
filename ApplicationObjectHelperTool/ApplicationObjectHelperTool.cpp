@@ -1,6 +1,7 @@
 #include"ApplicationObjectHelperTool.h"
 #include<iostream>
 #include<string>
+#include<future>
 
 // Forward declare message handler from imgui_impl_win32.cpp
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -110,46 +111,52 @@ int ApplicationObjectHelperTool::init(ThreadNotifier* threadNoti) {
        
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
       
-        {
-        
-            //OUR UI WILL BE HERE 
-            static bool colorMode = false; // we don't need to send it in the channel 
-            ImGui::SetNextWindowSize(ImVec2((float)ImGuiWidth, (float)ImGuiHight));
-            ImGui::SetNextWindowPos(ImVec2((float)posX, (float)posY));
-            ImGui::Begin("CFigure Control Panal");
-            ImGui::Text("Figure Color");
-            static float redBuffer = 0;
-            static float greenBuffer = 0;
-            static float blueBuffer = 0;
-            static float CrossHairColor[3] = { 0,0,0 };
-            ImGui::ColorPicker3("Figure Color", CrossHairColor);
-            
-            //std::cout << "red : " << std::to_string((int)(CrossHairColor[0] * 255)) << "green : " << std::to_string((int)CrossHairColor[1] * 255) << " blue" << std::to_string(int(CrossHairColor[2] * 255)) << std::endl;
-            ImGui::Text("Figure Top and back layer");
-            static const char* items[]{"Background Color","Drawing Color","Filling Color" ,"Figure Color" };
-            static int selectedItem = 0;
-            ImGui::ListBox("State",&selectedItem,items,IM_ARRAYSIZE(items));
-            //std::cout << "selected :  " << selectedItem<<std::endl;
-            ImGui::Checkbox("DarkMode",&colorMode);
-            if (colorMode == true) {
-                ImGui::StyleColorsDark();
+        /////////////////////////////////////////////////////////////
+         
+        std::async(std::launch::async, [this, threadNoti]() {
+            {
+
+                //OUR UI WILL BE HERE 
+                static bool colorMode = false; // we don't need to send it in the channel 
+                ImGui::SetNextWindowSize(ImVec2((float)ImGuiWidth, (float)ImGuiHight));
+                ImGui::SetNextWindowPos(ImVec2((float)posX, (float)posY));
+                ImGui::Begin("CFigure Control Panal");
+                ImGui::Text("Figure Color");
+                static float redBuffer = 0;
+                static float greenBuffer = 0;
+                static float blueBuffer = 0;
+                static float CrossHairColor[3] = { 0,0,0 };
+                ImGui::ColorPicker3("Figure Color", CrossHairColor);
+
+                //std::cout << "red : " << std::to_string((int)(CrossHairColor[0] * 255)) << "green : " << std::to_string((int)CrossHairColor[1] * 255) << " blue" << std::to_string(int(CrossHairColor[2] * 255)) << std::endl;
+                ImGui::Text("Figure Top and back layer");
+                static const char* items[]{ "Background Color","Drawing Color","Filling Color" ,"Figure Color" };
+                static int selectedItem = 0;
+                ImGui::ListBox("State", &selectedItem, items, IM_ARRAYSIZE(items));
+                //std::cout << "selected :  " << selectedItem<<std::endl;
+                ImGui::Checkbox("DarkMode", &colorMode);
+                if (colorMode == true) {
+                    ImGui::StyleColorsDark();
+                }
+                else {
+                    ImGui::StyleColorsLight();
+                }
+                if (redBuffer != CrossHairColor[0] && greenBuffer != CrossHairColor[1] && blueBuffer != CrossHairColor[2]) {
+                    PanelListener pl;
+                    pl.appPanelMngr = nullptr;
+                    pl.stat = PANAL_SENDING_COLOR;
+                    pl.target = selectedItem;
+                    pl.selectedObjColor = color(CrossHairColor[0] * 255, CrossHairColor[1] * 255, CrossHairColor[2] * 255);
+                    threadNoti->emit("PANEL_CHANGE_COLOR", &pl);
+                    redBuffer = CrossHairColor[0];
+                    greenBuffer = CrossHairColor[1];
+                    blueBuffer = CrossHairColor[2];
+                }
+                ImGui::End();
             }
-            else {
-                ImGui::StyleColorsLight();
-            }
-            if (redBuffer != CrossHairColor[0] && greenBuffer != CrossHairColor[1] && blueBuffer != CrossHairColor[2]) {
-                PanelListener pl;
-                pl.appPanelMngr = nullptr;
-                pl.stat = PANAL_SENDING_COLOR;
-                pl.target = selectedItem;
-                pl.selectedObjColor = color(CrossHairColor[0] * 255, CrossHairColor[1] * 255, CrossHairColor[2] * 255);
-                threadNoti->emit("PANEL_CHANGE_COLOR", &pl);
-                redBuffer = CrossHairColor[0];
-                greenBuffer = CrossHairColor[1];
-                blueBuffer = CrossHairColor[2];
-            }
-            ImGui::End();
-        }
+            });
+
+        // ///////////////////////////////////////////////////////////
         // Rendering
         ImGui::EndFrame();
         g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);

@@ -467,18 +467,21 @@ void ApplicationManager::UnSelectAllFigs() const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {		
-	std::cout << UI.InterfaceMode << std::endl;
-	if (UI.InterfaceMode == MODE_PLAY) {
-		pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
-	}
+	std::async(std::launch::async, [this]() {
+		std::cout << UI.InterfaceMode << std::endl;
+		if (UI.InterfaceMode == MODE_PLAY) {
+			pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
+		}
 
-	pGUI->CreateDrawToolBar();
-	if (GetSelectedFigure() != -1) {
-		pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
-	}
-	pGUI->ClearDrawArea();
-	for (int i = 0; i < FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		//std::this_thread::sleep_for(60ms);
+		pGUI->CreateDrawToolBar();
+		if (GetSelectedFigure() != -1) {
+			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
+		}
+		pGUI->ClearDrawArea();
+		for (int i = 0; i < FigCount; i++)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		});
 
 }
 
