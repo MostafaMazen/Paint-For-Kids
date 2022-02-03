@@ -3,7 +3,7 @@
 
 > app demo : 
 
-![this is demo](./demo/demos.gif)
+![this is demo](/demo/demos.gif)
 
 > application support : 
     - `DRAG` you can drag drew elements
