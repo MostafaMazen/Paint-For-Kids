@@ -19,7 +19,7 @@ This file was last modified on 05.16.1999
 windowinput* wipInput = NULL;
 int ctrlState = 1;
 int f1State = 1;
-MouseStateNotifier* mouseState = nullptr;
+ApplicationWindowState* mouseState = nullptr;
 ApplicationInputStates mouseInfo;
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
@@ -307,7 +307,7 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 window::window(const int iWindWidth, const int iWindHeight, const int iWindXPos, const int iWindYPos) :
 hInstance(GetModuleHandle(0)), iWindowWidth(iWindWidth), iWindowHeight(iWindHeight) {
 
-	mouseState = new MouseStateNotifier();
+	mouseState = new ApplicationWindowState();
 
 	iMouseX = -1;
 	iMouseY = -1;
@@ -436,7 +436,7 @@ HWND window::getWindow()const
 	return this->hwndWindow;
 }
 
-MouseStateNotifier* window::getMouseState() const
+ApplicationWindowState* window::getMouseState() const
 {
 	return mouseState;
 }

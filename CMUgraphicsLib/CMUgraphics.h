@@ -145,7 +145,7 @@ class window {
 
     HWND getWindow()const;
 
-    MouseStateNotifier* getMouseState() const;
+    ApplicationWindowState* getMouseState() const;
 
     // If this window is the last window on screen, the default behavior is that in
     // the window destructor the program waits for a mouse click before closing 

@@ -19,7 +19,7 @@ class Action;	//Forward Declaration
 //std::future<void> startThread(ApplicationManagerState* appMngState);
 
 //Main class that manages everything in the application.
-class ApplicationManager: public MouseEventHandler, public ThreadEventsHandler
+class ApplicationManager: public WindowStateHandler, public ThreadEventsHandler
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
 
@@ -32,7 +32,7 @@ private:
 	int FigCount, x, y;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	std::vector<Action*>history; //the history of the actions 
-	MouseStateNotifier* mouseState;
+	ApplicationWindowState* appWindowState;
 	ApplicationManagerState* appManagerState;
 	//Pointers to Input and Output classes
 	GUI* pGUI;

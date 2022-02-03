@@ -6,6 +6,7 @@
 #include "..\MouseState\MouseStateNotifier.h"
 #include "..\ApllicationManagerState\Header1.h"
 #include <map>
+#include<future>
 
 
 //This class is responsible for Grphical User Interface handling
@@ -15,7 +16,7 @@ class GUI
 {
 
 private:
-	MouseStateNotifier* mouseState;
+	ApplicationWindowState* mouseState;
 
 	ApplicationInputStates mStP;
 	
@@ -24,9 +25,9 @@ public:
 public:
 	GUI();
 	~GUI();	
-	std::map<window*, MouseStateNotifier*> CreateWind(int, int, int , int) const; //creates the application window
+	std::map<window*, ApplicationWindowState*> CreateWind(int, int, int , int) const; //creates the application window
 
-	MouseStateNotifier* getMouseState();
+	ApplicationWindowState* getMouseState();
 	/////////// Input Functoinality  /////////////////
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting() ;	 //Returns a string entered by the user

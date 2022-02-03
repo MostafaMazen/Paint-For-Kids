@@ -97,8 +97,6 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 
 	resetGame();
 
-	//threadNoti->on("PANEL_START", this);
-
 	cout << "From AppMngr: " << threadNoti << std::endl;
 	cout << "From AppMngr ThreadID: " << this_thread::get_id() << std::endl;
 	FigCount = x = y = 0;
@@ -107,15 +105,15 @@ ApplicationManager::ApplicationManager(ThreadNotifier* threadNoti)
 	pGUI = new GUI();
 
 	/* Start Listening on inputs */
-	mouseState = pGUI->getMouseState();
-	mouseState->on("MOUSE_DOWN", this);
-	mouseState->on("MOUSE_MOVE", this);
-	mouseState->on("MOUSE_UP", this);
-	mouseState->on("DELETE_KEY", this);
-	mouseState->on("CTRL_KEY", this);
-	mouseState->on("F1_KEY", this);
-	mouseState->on("WIN_SIZING", this);
-	mouseState->on("WIN_PAINTING", this);
+	appWindowState = pGUI->getMouseState();
+	appWindowState->on("MOUSE_DOWN", this);
+	appWindowState->on("MOUSE_MOVE", this);
+	appWindowState->on("MOUSE_UP", this);
+	appWindowState->on("DELETE_KEY", this);
+	appWindowState->on("CTRL_KEY", this);
+	appWindowState->on("F1_KEY", this);
+	appWindowState->on("WIN_SIZING", this);
+	appWindowState->on("WIN_PAINTING", this);
 	//mouseState->on("MSG_CHANGE", this);
 
 	this->threadNoti->on("PANEL_START", this);
@@ -344,41 +342,45 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 void ApplicationManager::deleteFigure(CFigure* pFig)
 {
 
-	int index = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i] == pFig) {
-			delete pFig;
-			index = i;
-			break;
+	std::async(std::launch::async, [this , pFig]() {
+		int index = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i] == pFig) {
+				delete pFig;
+				index = i;
+				break;
+			}
 		}
-	}
 
-	for (int i = index; i < FigCount; i++) {
-		FigList[i] = FigList[i + 1];
-		if (i + 1 == FigCount) {
-			FigList[i] = NULL;
-			FigCount--;
+		for (int i = index; i < FigCount; i++) {
+			FigList[i] = FigList[i + 1];
+			if (i + 1 == FigCount) {
+				FigList[i] = NULL;
+				FigCount--;
+			}
 		}
-	}
+		});
 }
 
 void ApplicationManager::DeleteSelectedFigures()
 {
 	
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->IsSelected()) {
-			delete FigList[i];
-			for (int j = i; j < FigCount; j++) {
-				FigList[j] = FigList[j + 1];
-				if (j + 1 == FigCount) {
-					FigList[j] = NULL;
-					//ERROR PRONE EREA
+	std::async(std::launch::async, [this]() {
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->IsSelected()) {
+				delete FigList[i];
+				for (int j = i; j < FigCount; j++) {
+					FigList[j] = FigList[j + 1];
+					if (j + 1 == FigCount) {
+						FigList[j] = NULL;
+						//ERROR PRONE EREA
+					}
 				}
+				i--;
+				FigCount--;
 			}
-			i--;
-			FigCount--;
 		}
-	}
+		});
 }
 
 //sendBack & bringToFront

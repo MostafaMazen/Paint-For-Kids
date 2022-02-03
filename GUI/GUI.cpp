@@ -16,21 +16,21 @@ GUI::GUI()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
+	UI.MenuItemWidth = 50;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = NULL;	//Filling color
-	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	UI.MsgColor = BLACK;		//Messages color
+	UI.BkGrndColor = color(142,166,225);	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
+	UI.StatusBarColor = WHITE;
 	UI.PenWidth = 3;	//width of the figures frames
 
 	//Create the output window
-	std::map<window*, MouseStateNotifier*> window_mouseState_map;
+	std::map<window*, ApplicationWindowState*> window_mouseState_map;
 	window_mouseState_map = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
-	pWind = window_mouseState_map.begin()->first;
-	mouseState = window_mouseState_map[pWind];
+	pWind = window_mouseState_map.begin()->first; // map window state with window reference
+	mouseState = window_mouseState_map[pWind]; //access the map fetch the address of window
 
 	mStP.msg = "";
 
@@ -162,9 +162,9 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 //								Output Functions										//
 //======================================================================================//
 
-std::map<window*, MouseStateNotifier*> GUI::CreateWind(int w, int h, int x, int y) const
+std::map<window*, ApplicationWindowState*> GUI::CreateWind(int w, int h, int x, int y) const
 { 
-	std::map<window*, MouseStateNotifier*> result;
+	std::map<window*, ApplicationWindowState*> result;
 	window* pW = new window(w, h, x, y);
 	pW->SetBrush(UI.BkGrndColor);
 	pW->SetPen(UI.BkGrndColor, 1);
@@ -172,7 +172,7 @@ std::map<window*, MouseStateNotifier*> GUI::CreateWind(int w, int h, int x, int 
 	result[pW] = pW->getMouseState();
 	return result;
 }
-MouseStateNotifier* GUI::getMouseState()
+ApplicationWindowState* GUI::getMouseState()
 {
 	//
 	return mouseState;
@@ -180,82 +180,106 @@ MouseStateNotifier* GUI::getMouseState()
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::ClearDrawingToolBar() const
 {
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+	
+	std::async(std::launch::async, [this]() {
+		pWind->SetPen(WHITE);
+		pWind->SetBrush(WHITE);
+		pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+		});
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateStatusBar() const
 {
-	pWind->SetPen(UI.StatusBarColor, 1);
-	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+	std::async(std::launch::async, [this]() {
+		pWind->SetPen(UI.StatusBarColor, 1);
+		pWind->SetBrush(UI.StatusBarColor);
+		pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+		});
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::ClearStatusBar() const
 {
-	//Clear Status bar by drawing a filled white Square
-	pWind->SetPen(UI.StatusBarColor, 1);
-	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+	std::async(std::launch::async, [this]() {
+		//Clear Status bar by drawing a filled white Square
+		pWind->SetPen(UI.StatusBarColor, 1);
+		pWind->SetBrush(UI.StatusBarColor);
+		pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+		});
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateDrawToolBar() const
 {
-	//UI.InterfaceMode = MODE_DRAW; not my job
+	std::async(std::launch::async, [this]() {
 
-	if (UI.InterfaceMode == MODE_DRAW) {	 
-		string MenuItemImages[DRAW_ITM_COUNT];
-		MenuItemImages[ITM_SQUR] = "images\\MenuItems\\square.jpg";
-		MenuItemImages[ITM_ELPS] = "images\\MenuItems\\ellipse.jpg";
-		MenuItemImages[ITM_HXGN] = "images\\MenuItems\\hexagon.jpg";
-		MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
-		MenuItemImages[ITM_SEND2BACK] = "images\\MenuItems\\s2b.jpg";
-		MenuItemImages[ITM_BRING2FRONT] = "images\\MenuItems\\b2f.jpg";
-		MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
-		MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
-		MenuItemImages[ITM_SWITCH2PLAY] = "images\\MenuItems\\switch.jpg";
-		MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
+		//UI.InterfaceMode = MODE_DRAW; not my job
 
-		//TODO: Prepare images for each menu item and add it to the list
+		pWind->SetPen(WHITE);
+		pWind->SetBrush(WHITE);
+		pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 
-		//Draw menu item one image at a time
-		for (int i = 0; i < DRAW_ITM_COUNT; i++)
-			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		if (UI.InterfaceMode == MODE_DRAW) {
+			string MenuItemImages[DRAW_ITM_COUNT];
+			MenuItemImages[ITM_SQUR] = "images\\MenuItems\\square.jpg";
+			MenuItemImages[ITM_ELPS] = "images\\MenuItems\\ellipse.jpg";
+			MenuItemImages[ITM_HXGN] = "images\\MenuItems\\hexagon.jpg";
+			MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
+			MenuItemImages[ITM_SEND2BACK] = "images\\MenuItems\\s2b.jpg";
+			MenuItemImages[ITM_BRING2FRONT] = "images\\MenuItems\\b2f.jpg";
+			MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+			MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+			MenuItemImages[ITM_SWITCH2PLAY] = "images\\MenuItems\\switch.jpg";
+			MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 
-
-		//Draw a line under the toolbar
-		pWind->SetPen(BLACK, 3);
-		pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);		
-
-	}
-	else if (UI.InterfaceMode == MODE_PLAY) {
-		string MenuItemImages[PLAY_ITM_COUNT];
-		MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
-		MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
-		MenuItemImages[ITM_PICK_FILL_TYPE] = "images\\MenuItems\\shapes&colors.jpg";
-		MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch.jpg";
-		MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
-		//TODO: Prepare images for each menu item and add it to the list
-
-		//Draw menu item one image at a time
-		for (int i = 0; i < PLAY_ITM_COUNT; i++)
-			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+			//TODO: Prepare images for each menu item and add it to the list
 
 
-		//Draw a line under the toolbar
-		pWind->SetPen(BLACK, 3);
-		pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
-	}
+			//Draw menu item one image at a time
+			for (int i = 0; i < DRAW_ITM_COUNT; i++)
+				pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	//You can draw the tool bar icons in any way you want.
-	//Below is one possible way
-	
-	//First prepare List of images for each menu item
-	//To control the order of these images in the menu, 
-	//reoder them in UI_Info.h ==> enum DrawMenuItem
+
+			//Draw a line under the toolbar
+			pWind->SetPen(BLACK, 3);
+			pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+		}
+		else if (UI.InterfaceMode == MODE_PLAY) {
+
+			pWind->SetPen(WHITE);
+			pWind->SetBrush(WHITE);
+			pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+
+			string MenuItemImages[PLAY_ITM_COUNT];
+			MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
+			MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
+			MenuItemImages[ITM_PICK_FILL_TYPE] = "images\\MenuItems\\shapes&colors.jpg";
+			MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch_off.jpg";
+			MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
+			//TODO: Prepare images for each menu item and add it to the list	
+
+
+			//Draw menu item one image at a time
+			for (int i = 0; i < PLAY_ITM_COUNT; i++)
+				pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+			//Draw a line under the toolbar
+			pWind->SetPen(BLACK, 3);
+			pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+		}
+
+		//You can draw the tool bar icons in any way you want.
+		//Below is one possible way
+
+		//First prepare List of images for each menu item
+		//To control the order of these images in the menu, 
+		//reoder them in UI_Info.h ==> enum DrawMenuItem
+		});
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -291,22 +315,26 @@ void GUI::CreatePlayToolBar() const
 
 void GUI::ClearDrawArea() const
 {
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);	
+	std::async(std::launch::async, [this]() {
+		pWind->SetPen(UI.BkGrndColor, 1);
+		pWind->SetBrush(UI.BkGrndColor);
+		pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		});
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::PrintMessage(string msg)	//Prints a message on status bar
 {
-	mStP.msg = msg;
-	mouseState->emit("MSG_CHANGE", mStP);
-	ClearStatusBar();	//First clear the status bar
-	
-	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+	std::async(std::launch::async, [this,msg]() {
+		mStP.msg = msg;
+		mouseState->emit("MSG_CHANGE", mStP);
+		ClearStatusBar();	//First clear the status bar
+
+		pWind->SetPen(UI.MsgColor, 50);
+		pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+		pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
+		});
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

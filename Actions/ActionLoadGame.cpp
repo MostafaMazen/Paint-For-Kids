@@ -62,24 +62,26 @@ void ActionLoadGame::Execute() {
 	cout << strBackClr << endl;
 	cout << figsCount << endl;
 
-	//!ERROR PRONE AREA	
-	while (figsCount)            //for each line on the file we will read it and determine its type
-	{
-	myFile >> figuerName;
-		if (figuerName == "Square")
-			oldFig = new CSquare;
-		else if (figuerName == "Ellipse")
-			oldFig = new CEllipse;
-		else if (figuerName == "Hexagon")
-			oldFig = new CHexagon;
-	
-		oldFig->Load(myFile); 
-		pManager->AddFigure(oldFig); 
-		figsCount--;
+	std::async(std::launch::async, [this,&figsCount,&myFile,&figuerName,&oldFig,&pGUI]() {
+		//!ERROR PRONE AREA	
+		while (figsCount)            //for each line on the file we will read it and determine its type
+		{
+			myFile >> figuerName;
+			if (figuerName == "Square")
+				oldFig = new CSquare;
+			else if (figuerName == "Ellipse")
+				oldFig = new CEllipse;
+			else if (figuerName == "Hexagon")
+				oldFig = new CHexagon;
 
-	}
-	pManager->UpdateInterface();
-	pGUI->PrintMessage("file Loaded ");
+			oldFig->Load(myFile);
+			pManager->AddFigure(oldFig);
+			figsCount--;
+
+		}
+		pManager->UpdateInterface();
+		pGUI->PrintMessage("file Loaded ");
+		});
 
 }
 
