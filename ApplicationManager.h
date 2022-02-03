@@ -68,7 +68,7 @@ public:
 	//ApplicationFiguresHelperPanelManager* panelManeger;
 	ThreadNotifier* threadNoti;
 
-	virtual void onEvent(MouseStPoint &data);
+	virtual void onEvent(ApplicationInputStates &data);
 	virtual void onMessageRecieved(PanelListener* panelListen);
 	ApplicationManager(ThreadNotifier* threadNoti);
 	~ApplicationManager();

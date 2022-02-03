@@ -6,6 +6,8 @@ ActionSendToBack::ActionSendToBack(ApplicationManager* pApp, CFigure* sFigure) :
 
 
 void ActionSendToBack::Execute() {
+	//calculate the size of the figList 
+	
 	if (selectedFigure != NULL)
 	{
 		pManager->SendFigureBack(selectedFigure);

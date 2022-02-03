@@ -12,10 +12,10 @@ CFigure* returnFig(void* fig);
 class MouseEventHandler{
 
 protected: 
-    MouseStPoint mouseStPoint;
+    ApplicationInputStates mouseStPoint;
     public:
-    virtual void onEvent(MouseStPoint& data) = 0;
-    virtual MouseStPoint getMouseState() {
+    virtual void onEvent(ApplicationInputStates& data) = 0;
+    virtual ApplicationInputStates getMouseState() {
         return mouseStPoint;
     }
 

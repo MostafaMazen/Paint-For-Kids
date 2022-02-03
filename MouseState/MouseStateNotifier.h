@@ -46,7 +46,7 @@ class MouseStateNotifier{
         }
     }
 
-    void emit(std::string topic , MouseStPoint& data){
+    void emit(std::string topic , ApplicationInputStates& data){
         for(int i = 0 ; i < events[topic].size();i++){
             //error prone area if FIX AFTER DEBUG
             events[topic][i]->onEvent(data);

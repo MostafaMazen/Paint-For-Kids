@@ -20,7 +20,7 @@ windowinput* wipInput = NULL;
 int ctrlState = 1;
 int f1State = 1;
 MouseStateNotifier* mouseState = nullptr;
-MouseStPoint mouseInfo;
+ApplicationInputStates mouseInfo;
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	switch(msg) {

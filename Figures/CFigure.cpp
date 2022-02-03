@@ -8,13 +8,14 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 CFigure::CFigure()
 {
+	
 }
 
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{	return Selected == false ? false : true; }
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }

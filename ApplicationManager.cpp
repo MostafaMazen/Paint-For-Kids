@@ -15,7 +15,7 @@
 
 
 
-void ApplicationManager::onEvent(MouseStPoint& data)
+void ApplicationManager::onEvent(ApplicationInputStates& data)
 {
 	ctrlState = data.ctrlKey;   // get ctrl button state
 	f1State = data.f1Key;   // get f1 button state
@@ -364,6 +364,7 @@ void ApplicationManager::deleteFigure(CFigure* pFig)
 
 void ApplicationManager::DeleteSelectedFigures()
 {
+	
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsSelected()) {
 			delete FigList[i];
@@ -383,31 +384,50 @@ void ApplicationManager::DeleteSelectedFigures()
 //sendBack & bringToFront
 void ApplicationManager::SendFigureBack(CFigure* selectedFigure)
 {
-	CFigure* temp = selectedFigure;
-	int swappingIndex = 0;
-	for (int i = 0; i < FigCount; i++)
-		if (selectedFigure == FigList[i])
-		{
-			swappingIndex = i;
-			break;
-		}
+	
+	//check for any shape selected 
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsSelected()) {
+			CFigure* temp = selectedFigure;
+			int swappingIndex = 0;
+			for (int i = 0; i < FigCount; i++)
+				if (selectedFigure == FigList[i])
+				{
+					swappingIndex = i;
+					break;
+				}
 
-	for (int i = swappingIndex; i > 0; i--)
-		FigList[i] = FigList[i - 1];
-	FigList[0] = temp;
+			for (int i = swappingIndex; i > 0; i--)
+				FigList[i] = FigList[i - 1];
+			FigList[0] = temp;
+		}
+		
+	}
+	return;
+	
+	
 }
 
 void ApplicationManager::BringFigureFront(CFigure* selectedFigure)
 {
-	CFigure* temp = selectedFigure;
-	int swappingIndex = 0;
-	for (int i = 0; i < FigCount; i++)
-		if (selectedFigure == FigList[i])
-			swappingIndex = i;
+	//check if any shape selected on the board 
+	//check for any shape selected 
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsSelected()) {
+			CFigure* temp = selectedFigure;
+			int swappingIndex = 0;
+			for (int i = 0; i < FigCount; i++)
+				if (selectedFigure == FigList[i])
+					swappingIndex = i;
 
-	for (int i = swappingIndex; i < FigCount - 1; i++)
-		FigList[i] = FigList[i + 1];
-	FigList[FigCount - 1] = temp;
+			for (int i = swappingIndex; i < FigCount - 1; i++)
+				FigList[i] = FigList[i + 1];
+			FigList[FigCount - 1] = temp;
+		}
+		
+	}
+	return;
+	
 }
 
 CFigure *ApplicationManager::GetFigure(int x, int y) const

@@ -284,6 +284,7 @@
     <ClInclude Include="Actions\ActionModeFillColor_PLAY.h" />
     <ClInclude Include="Actions\ActionSendToBack.h" />
     <ClInclude Include="Actions\ActionBringToFront.h" />
+    <ClInclude Include="ApplicaionPerformanceManager\ApplicationPerformanceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewFile.txt" />

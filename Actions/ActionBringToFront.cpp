@@ -5,6 +5,7 @@ ActionBringToFront::ActionBringToFront(ApplicationManager* pApp, CFigure* sFigur
 }
 
 void ActionBringToFront::Execute() {
+	
 	if (selectedFigure != NULL)
 	{
 		pManager->BringFigureFront(selectedFigure);

@@ -213,6 +213,7 @@
     <ClInclude Include="Actions\ActionToPlayToDrawToggle.h" />
     <ClInclude Include="Actions\Resize.h" />
     <ClInclude Include="ApllicationManagerState\Header1.h" />
+    <ClInclude Include="ApplicaionPerformanceManager\ApplicationPerformanceManager.h" />
     <ClInclude Include="ApplicationFiguresHelperPanel\ApplicationFiguresHelperPanel.h" />
     <ClInclude Include="ApplicationObjectHelperTool\ApplicationObjectHelperTool.h" />
     <ClInclude Include="ApplicationServices\ThreadEvenHandler.h" />

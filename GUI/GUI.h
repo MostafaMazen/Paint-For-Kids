@@ -17,7 +17,7 @@ class GUI
 private:
 	MouseStateNotifier* mouseState;
 
-	MouseStPoint mStP;
+	ApplicationInputStates mStP;
 	
 public:	
 	window* pWind;	//Pointer to the Graphics Window
