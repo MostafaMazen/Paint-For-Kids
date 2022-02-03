@@ -42,6 +42,9 @@ Point CEllipse::getPoint()
 
 void CEllipse::setCenterPoint(int x, int y)
 {
+	if ((y - yLength / 2) <= 50) {
+		return;
+	}
 	firstPoint.x = x - xLength/2;
 	firstPoint.y = y - yLength/2;
 	secondPoint.x = x + xLength/2;

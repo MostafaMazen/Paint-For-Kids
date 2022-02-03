@@ -25,6 +25,9 @@ void ApplicationManager::onEvent(ApplicationInputStates& data)
 
 		std::async(std::launch::async, &ApplicationManager::UpdateInterface,this);
 		std::async(std::launch::async, &GUI::CreateStatusBar, pGUI);
+		std::async(std::launch::async, [this]() {
+			pGUI->CreateDrawToolBar();
+			});
 	}
 
 	// case delete button is pressed
@@ -474,7 +477,6 @@ void ApplicationManager::UpdateInterface() const
 		}
 
 		//std::this_thread::sleep_for(60ms);
-		pGUI->CreateDrawToolBar();
 		if (GetSelectedFigure() != -1) {
 			pGUI->PrintMessage(FigList[GetSelectedFigure()]->getFigData());
 		}

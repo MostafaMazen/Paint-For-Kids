@@ -34,6 +34,9 @@ void CSquare::setCenterPoint(int x, int y)
 {
 	/*center.x = x;
 	center.y = y;*/
+	if (y - (length / 2) <= 50) {
+		return;
+	}
 	TopLeftCorner.x = x - (length/2);
 	TopLeftCorner.y = y - (length/2);
 }

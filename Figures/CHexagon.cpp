@@ -53,6 +53,9 @@ Point CHexagon::getPoint()
 
 void CHexagon::setCenterPoint(int x, int y)
 {
+	if (y - raduis <= 50) {
+		return;
+	}
 	center.x = x;
 	center.y = y;
 	for (int i = 0; i < 6; i++) {
