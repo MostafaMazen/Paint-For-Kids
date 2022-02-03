@@ -384,7 +384,7 @@ void ApplicationManager::DeleteSelectedFigures()
 void ApplicationManager::SendFigureBack(CFigure* selectedFigure)
 {
 	CFigure* temp = selectedFigure;
-	int swappingIndex;
+	int swappingIndex = 0;
 	for (int i = 0; i < FigCount; i++)
 		if (selectedFigure == FigList[i])
 		{
@@ -400,7 +400,7 @@ void ApplicationManager::SendFigureBack(CFigure* selectedFigure)
 void ApplicationManager::BringFigureFront(CFigure* selectedFigure)
 {
 	CFigure* temp = selectedFigure;
-	int swappingIndex;
+	int swappingIndex = 0;
 	for (int i = 0; i < FigCount; i++)
 		if (selectedFigure == FigList[i])
 			swappingIndex = i;

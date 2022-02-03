@@ -4,7 +4,6 @@ ActionBringToFront::ActionBringToFront(ApplicationManager* pApp, CFigure* sFigur
 	selectedFigure = sFigure;
 }
 
-
 void ActionBringToFront::Execute() {
 	if (selectedFigure != NULL)
 	{
