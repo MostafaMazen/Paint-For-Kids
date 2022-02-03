@@ -17,10 +17,10 @@
 - `events` you can listen and extends any event you like 
 - `multithreading` the application ui never get blocked 
 > patterns : source GOF 
-- command pattern 
-- pubsub pattern [observer pattern]
-- MVC 
-- chain of responsibility  [dispatching menu actions]
-- composite pattern
-- callback pattern 
+- `command` pattern 
+- `pubsub` pattern [observer pattern]
+- `MVC` 
+- `chain of responsibility`  [dispatching menu actions]
+- `composite pattern`
+- `callback pattern` 
     
