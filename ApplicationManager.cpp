@@ -472,9 +472,12 @@ void ApplicationManager::UpdateInterface() const
 {		
 	std::async(std::launch::async, [this]() {
 		std::cout << UI.InterfaceMode << std::endl;
-		if (UI.InterfaceMode == MODE_PLAY) {
-			pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
-		}
+		//if (UI.InterfaceMode == MODE_PLAY) {
+		//	pGUI->ClearDrawingToolBar(); //updare interface his job is to clean the screen according to the the mode we are in 		
+		//	std::async(std::launch::async, [this]() {
+		//		pGUI->CreateDrawToolBar();
+		//		});
+		//}
 
 		//std::this_thread::sleep_for(60ms);
 		if (GetSelectedFigure() != -1) {

@@ -65,6 +65,7 @@ void CHexagon::setCenterPoint(int x, int y)
 	}
 }
 
+
 void CHexagon::setSize(float factor)
 {
 	// change radius acoording to size
