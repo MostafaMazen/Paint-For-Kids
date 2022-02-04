@@ -57,6 +57,7 @@ void ActionSelectFig::manageGame(int gameMode, CFigure* figure)
 		if (pManager->gameStates.figType == "") {
 			pManager->gameStates.figType = figure->getShapeType();
 			pManager->gameMachineValidCount(GAME_MODE_FIGTYPE);
+			MessageBox(pManager->GetGUI()->pWind->getWindow(), "You are playing on FigType mode", "Alert", MB_OKCANCEL);
 		}
 		else {
 			if (figure->getShapeType() == pManager->gameStates.figType) {
@@ -81,6 +82,7 @@ void ActionSelectFig::manageGame(int gameMode, CFigure* figure)
 		if (pManager->gameStates.figColor == "") {
 			pManager->gameStates.figColor = figure->getColor();
 			pManager->gameMachineValidCount(GAME_MODE_FILLCOLOR);
+			MessageBox(pManager->GetGUI()->pWind->getWindow(), "You are playing on FillColor mode", "Alert", MB_OKCANCEL);
 		}
 		else {
 			if (figure->getColor() == pManager->gameStates.figColor) {
@@ -106,6 +108,7 @@ void ActionSelectFig::manageGame(int gameMode, CFigure* figure)
 			pManager->gameStates.figColor = figure->getColor();
 			pManager->gameStates.figType = figure->getShapeType();
 			pManager->gameMachineValidCount(GAME_MODE_TYPE_AND_FILL);
+			MessageBox(pManager->GetGUI()->pWind->getWindow(), "You are playing on FigType and fillColor mode", "Alert", MB_OKCANCEL);
 		}
 		else {
 			if (figure->getColor() == pManager->gameStates.figColor && figure->getShapeType() == pManager->gameStates.figType) {

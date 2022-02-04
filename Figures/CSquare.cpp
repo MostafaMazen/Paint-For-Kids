@@ -10,6 +10,7 @@ CSquare::CSquare()
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
+	ID++;
 	TopLeftCorner = P1;
 	int x = (TopLeftCorner.x - (TopLeftCorner.x + length)) / 2;
 	int y = (TopLeftCorner.y - (TopLeftCorner.y + length)) / 2;
@@ -76,7 +77,7 @@ string CSquare::getFigData() const
 	std::string figEndPoint = "BRPoint: (" + std::to_string(TopLeftCorner.x+length) + ","
 		+ std::to_string(TopLeftCorner.y+length) + ")";
 	std::string figArea = "Area: " + std::to_string(length * length);
-	std::string figData = figID + " - " + figStartPoint + " - " + figEndPoint + " - " + figArea;
+	std::string figData = figStartPoint + " - " + figEndPoint + " - " + figArea; //figID + " - " +
 	return figData;
 }
 

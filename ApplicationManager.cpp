@@ -198,10 +198,14 @@ Action* ApplicationManager::CreateAction(ActionType& ActType)
 			}
 			break;
 		case SEND_BACK:
-			newAct = new ActionSendToBack(this, FigList[GetSelectedFigure()]);
+			if (GetSelectedFigure() != -1) {
+				newAct = new ActionSendToBack(this, FigList[GetSelectedFigure()]);
+			}
 			break;
 		case BRNG_FRNT:
-			newAct = new ActionBringToFront(this, FigList[GetSelectedFigure()]);
+			if (GetSelectedFigure() != -1) {
+				newAct = new ActionBringToFront(this, FigList[GetSelectedFigure()]);
+			}
 			break;
 		case SAVE:
 			newAct = new ActionSave(this, FigCount);

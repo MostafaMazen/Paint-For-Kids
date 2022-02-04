@@ -8,6 +8,7 @@
 
 void CHexagon::SavePoints(ofstream& OutFile)
 {
+	
 	for (int i = 0; i < 6; i++) {
 		OutFile << pX[i]<<"\t";
 		OutFile << pY[i]<<"\t";
@@ -15,9 +16,11 @@ void CHexagon::SavePoints(ofstream& OutFile)
 }
 CHexagon::CHexagon()
 {
+	ID++;
 }
 CHexagon::CHexagon(Point _center, int _raduis, int* _pX, int* _pY, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
+	ID++;
 	pX = _pX;
 	pY = _pY;
 	center = _center;
@@ -116,7 +119,7 @@ string CHexagon::getFigData() const
 		+ std::to_string(center.y) + ")";
 	float area = abs(((sqrt(3) * 3) / 2) * (raduis ^ 2));
 	std::string areaAsString = "Area: " + std::to_string(area);
-	std::string figData = figID + " - " + centerPoint + " - " + areaAsString; //+ " - " + figArea;	
+	std::string figData = centerPoint + " - " + areaAsString; //+ " - " + figArea;	//figID + " - " +
 	return figData;
 }
 

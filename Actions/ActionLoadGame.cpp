@@ -36,7 +36,7 @@ void ActionLoadGame::Execute() {
 	myFile >> strDrwClr >>strFillClr>> strBackClr;
 	int r, g, b;
 	color savedColor;
-	//this manual casting 
+	//this manual casting
 	//is importants cause function take only pointer char when fstream retrive string
 	drwClr = &strDrwClr[0];
 	fillClr = &strFillClr[0];

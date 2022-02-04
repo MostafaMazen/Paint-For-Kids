@@ -1,5 +1,7 @@
 #include "CFigure.h"
 
+int CFigure::ID = 0;
+
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
@@ -8,7 +10,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 CFigure::CFigure()
 {
-	
+	ID++;
 }
 
 void CFigure::SetSelected(bool s)

@@ -13,7 +13,6 @@
 
 class Action;	//Forward Declaration
 
-
 //void myThread(ApplicationManagerState* appMngState);
 //
 //std::future<void> startThread(ApplicationManagerState* appMngState);
