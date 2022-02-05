@@ -284,29 +284,6 @@ void GUI::CreateDrawToolBar() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-//THE WORST FUNCTION EVER WE'VE CREATED 
-/*
-void GUI::CreatePlayToolBar() const
-{
-	UI.InterfaceMode = MODE_PLAY; // THIS IS NOT MY JOB
-	///TODO: write code to create Play mode menu
-	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[ITM_PICK_FIGURETYPE] = "images\\MenuItems\\shapes.jpg";
-	MenuItemImages[ITM_PICK_FILLCOLOR] = "images\\MenuItems\\colors.jpg";
-	MenuItemImages[ITM_SWITCH2DRAW] = "images\\MenuItems\\switch.jpg";
-	MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
-
-
-	//Draw menu item one image at a time
-	for (int i = 0; i < PLAY_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i+ ITM_PICK_FIGURETYPE], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
-
-	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 1);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-}
-*/
 void GUI::CreatePlayToolBar() const
 {
 	//DEPRECATED DON'T USE IT PLEAS [JIMMY]
