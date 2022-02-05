@@ -3,12 +3,14 @@
 
 CEllipse::CEllipse()
 {
-	ID++;
+	sharedID++;
+	ID = sharedID;
 }
 
 CEllipse::CEllipse(Point p1, Point p2, double StartAng, double EndAng, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
-	ID++;
+	sharedID++;
+	ID = sharedID;
 	firstPoint = sFP = p1;
 	secondPoint = sSP =  p2;
 
@@ -94,7 +96,7 @@ string CEllipse::getFigData() const
 	std::string figEndPoint = "BRPoint: (" + std::to_string(secondPoint.x) + ","
 		+ std::to_string(secondPoint.y) + ")";
 	//std::string figArea = "Area: " + std::to_string(length * length);
-	std::string figData = figStartPoint + " - " + figEndPoint; //+ " - " + figArea; //figID + " - " +
+	std::string figData = figID + " - " + figStartPoint + " - " + figEndPoint; //+ " - " + figArea; 
 	return figData;
 }
 

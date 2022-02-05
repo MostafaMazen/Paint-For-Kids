@@ -1,6 +1,6 @@
 #include "CFigure.h"
 
-int CFigure::ID = 0;
+int CFigure::sharedID = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 

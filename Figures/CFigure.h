@@ -9,7 +9,8 @@ class CFigure
 {
 protected:
 	Point center;
-	static int ID;		//Each figure has an ID
+	static int sharedID;		//Each figure has an ID
+	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
