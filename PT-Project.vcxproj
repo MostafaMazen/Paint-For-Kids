@@ -266,6 +266,7 @@
     <Text Include="NewFile2.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Demo\Demo.gif" />
     <Image Include="images\MenuItems\b2f.jpg" />
     <Image Include="images\MenuItems\close_window_50px.jpg" />
     <Image Include="images\MenuItems\collage.jpg" />

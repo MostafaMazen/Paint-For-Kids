@@ -3,7 +3,7 @@
 
 > app demo : 
 
-![this is demo](/demo/demos.gif)
+![this is demo](/Demo/Demo.gif)
 
 > application support : 
 

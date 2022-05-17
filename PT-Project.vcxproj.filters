@@ -308,5 +308,6 @@
     <Image Include="images\MenuItems\opened_folder_60px.jpg" />
     <Image Include="images\MenuItems\close_window_50px.jpg" />
     <Image Include="images\MenuItems\free-exit.jpg" />
+    <Image Include="Demo\Demo.gif" />
   </ItemGroup>
 </Project>
